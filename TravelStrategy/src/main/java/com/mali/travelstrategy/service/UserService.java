@@ -1,5 +1,6 @@
 package com.mali.travelstrategy.service;
 
+import com.mali.travelstrategy.dto.UserPasswordDto;
 import com.mali.travelstrategy.entity.ApiResult;
 import com.mali.travelstrategy.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -37,6 +38,13 @@ public interface UserService extends IService<User> {
      * @return 响应数据
      */
     ApiResult update(User user);
+
+    /**
+     * 修改密码
+     * @param userPasswordDto       修改密码dto
+     * @return                      响应数据
+     */
+    ApiResult changePassword(UserPasswordDto userPasswordDto);
 
     /**
      * 通过id 查询用户信息

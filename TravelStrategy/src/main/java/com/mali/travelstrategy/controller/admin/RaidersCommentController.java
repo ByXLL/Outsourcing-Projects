@@ -23,11 +23,6 @@ public class RaidersCommentController {
     @Autowired
     private RaidersCommentServiceImpl raidersCommentService;
 
-    @PostMapping("/add")
-    public ApiResult add(RaidersComment raidersComment){
-        return raidersCommentService.add(raidersComment);
-    }
-
     @PostMapping("/del")
     public ApiResult delete(@PathParam("id") Integer id) {
         return raidersCommentService.delete(id);

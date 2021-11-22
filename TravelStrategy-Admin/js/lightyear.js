@@ -28,15 +28,16 @@ var lightyear = function(){
      * @param $icon 图标，例如：'fa fa-user' 或 'glyphicon glyphicon-warning-sign'
      * @param $from 'top' 或 'bottom'
      * @param $align 'left', 'right', 'center'
+     * @param $url 跳转链接  例如： https://www.xxxx.com
      * @author CaiWeiMing <314013107@qq.com>
      */
-    var tips = function ($msg, $type, $delay, $icon, $from, $align) {
+    var tips = function ($msg, $type, $delay, $icon, $from, $align, $url) {
         $type  = $type || 'info';
         $delay = $delay || 1000;
         $from  = $from || 'top';
         $align = $align || 'center';
         $enter = $type == 'danger' ? 'animated shake' : 'animated fadeInUp';
-
+		$url = $url || url;
         jQuery.notify({
             icon: $icon,
             message: $msg
@@ -61,13 +62,24 @@ var lightyear = function(){
                 exit: 'animated fadeOutDown'
             }
         });
+		if($url!=''){
+			setTimeout(function(){
+				window.location.href=$url;
+			},$delay);
+		}
+		
     };
+	
+	var url = '';
 	
 	return {
         // 页面小提示
-        notify  : function ($msg, $type, $delay, $icon, $from, $align) {
-            tips($msg, $type, $delay, $icon, $from, $align);
+        notify  : function ($msg, $type, $delay, $icon, $from, $align, $url) {
+            tips($msg, $type, $delay, $icon, $from, $align, $url);
         },
+		url : function ($url){
+			url=$url;
+		},
         // 页面加载动画
 		loading : function ($mode) {
 		    pageLoader($mode);

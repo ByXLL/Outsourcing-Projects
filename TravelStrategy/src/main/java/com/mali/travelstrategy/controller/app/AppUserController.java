@@ -2,14 +2,12 @@ package com.mali.travelstrategy.controller.app;
 
 
 import com.mali.travelstrategy.annotation.PassTokenRequired;
+import com.mali.travelstrategy.dto.UserPasswordDto;
 import com.mali.travelstrategy.entity.ApiResult;
 import com.mali.travelstrategy.entity.User;
 import com.mali.travelstrategy.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.util.Map;
@@ -18,6 +16,7 @@ import java.util.Map;
  * 用户 前端控制器
  * @author By-mali
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/app/user")
 public class AppUserController {
@@ -41,8 +40,13 @@ public class AppUserController {
         return userService.update(user);
     }
 
+    @PostMapping("/editPassword")
+    public ApiResult editPassword(@RequestBody UserPasswordDto userPasswordDto) {
+        return userService.changePassword(userPasswordDto);
+    }
+
     @PassTokenRequired
-    @PostMapping("/find")
+    @GetMapping("/find")
     public ApiResult findById(@PathParam("id") Integer id) {
         return userService.findById(id);
     }

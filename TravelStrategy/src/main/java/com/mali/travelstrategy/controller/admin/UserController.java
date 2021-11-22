@@ -2,6 +2,7 @@ package com.mali.travelstrategy.controller.admin;
 
 
 import com.mali.travelstrategy.annotation.PassTokenRequired;
+import com.mali.travelstrategy.dto.UserPasswordDto;
 import com.mali.travelstrategy.entity.ApiResult;
 import com.mali.travelstrategy.entity.User;
 import com.mali.travelstrategy.service.impl.UserServiceImpl;
@@ -23,8 +24,8 @@ public class UserController {
 
     @PassTokenRequired
     @PostMapping("/login")
-    public ApiResult login(@RequestBody Map<String,String> userMap) {
-        return userService.login(userMap.get("userName"),userMap.get("password"));
+    public ApiResult login(@RequestBody Map<String,String> userForm) {
+        return userService.login(userForm.get("userName"),userForm.get("password"));
     }
 
     @PassTokenRequired
@@ -43,7 +44,12 @@ public class UserController {
         return userService.update(user);
     }
 
-    @PostMapping("/find")
+    @PostMapping("/editPassword")
+    public ApiResult editPassword(@RequestBody UserPasswordDto userPasswordDto) {
+        return userService.changePassword(userPasswordDto);
+    }
+
+    @GetMapping("/find")
     public ApiResult findById(@PathParam("id") Integer id) {
         return userService.findById(id);
     }
