@@ -2,6 +2,7 @@ package com.mali.travelstrategy.controller.admin;
 
 
 import com.mali.travelstrategy.annotation.PassTokenRequired;
+import com.mali.travelstrategy.dto.UserParam;
 import com.mali.travelstrategy.dto.UserPasswordDto;
 import com.mali.travelstrategy.entity.ApiResult;
 import com.mali.travelstrategy.entity.User;
@@ -52,6 +53,11 @@ public class UserController {
     @GetMapping("/find")
     public ApiResult findById(@PathParam("id") Integer id) {
         return userService.findById(id);
+    }
+
+    @PostMapping("/search")
+    public ApiResult search(@RequestBody UserParam userParam, @PathParam("page") Integer page, @PathParam("pageSize") Integer pageSize) {
+        return userService.findParamByPager(userParam,page,pageSize);
     }
 }
 

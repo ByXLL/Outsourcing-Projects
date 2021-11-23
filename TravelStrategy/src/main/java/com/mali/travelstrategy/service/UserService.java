@@ -1,5 +1,7 @@
 package com.mali.travelstrategy.service;
 
+import com.mali.travelstrategy.dto.RaidersParam;
+import com.mali.travelstrategy.dto.UserParam;
 import com.mali.travelstrategy.dto.UserPasswordDto;
 import com.mali.travelstrategy.entity.ApiResult;
 import com.mali.travelstrategy.entity.User;
@@ -52,4 +54,13 @@ public interface UserService extends IService<User> {
      * @return          响应数据
      */
     ApiResult findById(Integer id);
+
+    /**
+     * 条件分页查询
+     * @param userParam     用户名
+     * @param page          当前页码
+     * @param pageSize      每页大小
+     * @return              响应数据
+     */
+    ApiResult findParamByPager(UserParam userParam, Integer page, Integer pageSize);
 }

@@ -230,13 +230,82 @@
         </nav>
       </header>
       <!--End 头部信息-->
-      <!--页面主要内容-->
-      <main class="lyear-layout-content">
-        <div class="container-fluid p-t-15">
-          
+    <!--页面主要内容-->
+    <main class="lyear-layout-content">
+      
+      <div class="container-fluid">
+        
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="tab-content">
+                <div class="tab-pane active">
+                  
+                  <form action="javascript:;" name="edit-form" class="edit-form">
+                    <div class="form-group">
+                      <label for="web_site_title">用户名</label>
+                      <input class="form-control" type="text" id="username" name="username" value="" placeholder="请输入用户名" >
+                    </div>
+                    <div class="form-group">
+                      <label for="web_site_title">昵称</label>
+                      <input class="form-control" type="text" id="nickName" name="nickName" value="" placeholder="请输入昵称" >
+                    </div>
+                    <div class="form-group">
+                      <label for="web_site_title">密码</label>
+                      <input class="form-control" type="password" id="password" name="password" value="" placeholder="请输入密码" >
+                    </div>
+                    <div class="form-group">
+                      <label for="web_site_title">城市</label>
+                      <input class="form-control" type="text" id="city" name="city" value="" placeholder="请输入城市" >
+                    </div>
+                    <div class="form-group">
+                      <label for="web_site_title">年龄</label>
+                      <input class="form-control" type="text" id="age" name="age" value="" placeholder="请输入年龄" >
+                    </div>
+                    <div class="form-group">
+                      <label for="web_site_description">简介</label>
+                      <textarea class="form-control" id="introduction" rows="2" name="introduction" placeholder="请输入简介" ></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="role">角色</label>
+                      <div class="clearfix">
+                        <label class="lyear-radio radio-inline radio-primary">
+                          <input type="radio" name="role" value="2" checked><span>普通用户</span>
+                        </label>
+                        <label class="lyear-radio radio-inline radio-primary">
+                          <input type="radio" name="role" value="1"><span>管理员</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="role">性别</label>
+                      <div class="clearfix">
+                        <label class="lyear-radio radio-inline radio-primary">
+                          <input type="radio" name="sex" value="1"><span>男</span>
+                        </label>
+                        <label class="lyear-radio radio-inline radio-primary">
+                          <input type="radio" name="sex" value="0" checked><span>女</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <button type="button" class="btn btn-primary m-r-5">确 定</button>
+                      <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
+                    </div>
+                  </form>
+                  
+                </div>
+              </div>
+
+            </div>
+          </div>
           
         </div>
-      </main>
+        
+      </div>
+      
+    </main>
+    <!--End 页面主要内容-->
   </div>
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>

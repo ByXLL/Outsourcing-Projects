@@ -1,6 +1,9 @@
 package com.mali.travelstrategy.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mali.travelstrategy.dto.UserParam;
 import com.mali.travelstrategy.dto.UserPasswordDto;
 import com.mali.travelstrategy.entity.ApiResult;
 import com.mali.travelstrategy.entity.User;
@@ -136,7 +139,35 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if(id == null) { return new ApiResult(HttpCodeEnum.ARG_ERROR.getCode(),"参数异常"); }
         User user = userMapper.selectById(id);
         if(user == null) {  return new ApiResult(HttpCodeEnum.ERROR.getCode(),"操作失败,用户不存在");}
-        user.setPassword("");
-        return new ApiResult(HttpCodeEnum.SUCCESS.getCode(),"查询成功",user);
+        UserVO userVO = new UserVO();
+        BeanUtils.copyProperties(user,userVO);
+        return new ApiResult(HttpCodeEnum.SUCCESS.getCode(),"查询成功",userVO);
+    }
+
+    /**
+     * 条件分页查询
+     *
+     * @param userParam 用户查询实体
+     * @param page     当前页码
+     * @param pageSize 每页大小
+     * @return 响应数据
+     */
+    @Override
+    public ApiResult findParamByPager(UserParam userParam, Integer page, Integer pageSize) {
+        if(page == null || pageSize == null) {
+            return new ApiResult(HttpCodeEnum.ARG_ERROR.getCode(),"参数异常");
+        }
+        QueryWrapper<UserVO> queryWrapper = new QueryWrapper<>();
+        if(StringUtils.isNotBlank(userParam.getNickName())) {
+            queryWrapper.like("nick_name",userParam.getNickName());
+        }
+        if(StringUtils.isNotBlank(userParam.getUserName())) {
+            queryWrapper.like("user_name",userParam.getUserName());
+        }
+        if(userParam.getId() != null) {
+            queryWrapper.like("id",userParam.getId());
+        }
+        IPage<UserVO> userVOIPage = userMapper.selectUserList(new Page<>(page, pageSize), queryWrapper);
+        return new ApiResult(HttpCodeEnum.SUCCESS.getCode(),"查询成功",userVOIPage);
     }
 }
