@@ -29,7 +29,6 @@ public class UserController {
         return userService.login(userForm.get("userName"),userForm.get("password"));
     }
 
-    @PassTokenRequired
     @PostMapping("/add")
     public ApiResult add(@RequestBody User user) {
         return userService.add(user);

@@ -27,6 +27,22 @@ $.ajaxSetup({
   // },
 });
 
+
+function queryURLParameter(url) {
+  var quesIndex = url.indexOf('?'),
+      obj = {};
+  if (quesIndex === -1) {     //URL中没有传参，直接返回空对象
+      return obj;
+  }
+  url = url.substring(quesIndex + 1);
+  var ary = url.split('&');
+  for (var i = 0; i < ary.length; i++) {
+     var curAry = ary[i].split('=');
+     obj[curAry[0]] = curAry[1]; 
+  }
+  return obj;
+}
+
 function logout() {
   window.localStorage.removeItem("token");
   window.localStorage.removeItem("userInfo");

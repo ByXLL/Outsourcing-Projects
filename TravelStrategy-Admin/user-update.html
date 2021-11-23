@@ -254,6 +254,7 @@
                     <div class="form-group">
                       <label for="web_site_title">密码</label>
                       <input class="form-control" type="password" id="password" name="password" value="" placeholder="请输入密码" >
+                      <small class="help-block text-danger">默认为空则不修改密码</small>
                     </div>
                     <div class="form-group">
                       <label for="web_site_title">城市</label>
@@ -266,6 +267,14 @@
                     <div class="form-group">
                       <label for="web_site_description">简介</label>
                       <textarea class="form-control" id="introduction" rows="2" name="introduction" placeholder="请输入简介" ></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label class="btn-block" for="status">用户状态</label>
+                      <label class="lyear-switch switch-solid switch-primary">
+                        <input type="checkbox" id="status" name="status">
+                        <span></span>
+                      </label>
+                      <small class="help-block">用户禁用后将无法登录</small>
                     </div>
                     <div class="form-group">
                       <label for="role">角色</label>
@@ -318,22 +327,81 @@
   <script src="js/common.js"></script>
 
   <script type="text/javascript">
-
-    function toSubmit(){
-      $.confirm({
-          title: '警告',
-          content: '把剑凄然望，无处招归舟。明日天涯路远，问谁留楚佩，弄影中洲？数英雄儿女，俯仰古今愁。',
-          type: 'orange',
-          typeAnimated: false,
-          buttons: {
-              omg: {
-                  text: '重试',
-                  btnClass: 'btn-orange',
-              },
-              close: {
-                  text: '关闭',
-              }
+    let user = {}
+    getUserInfo()
+    // 获取用户信息
+    function getUserInfo() {
+      let id = queryURLParameter(window.location.href).id
+      $.ajax({
+        url: `http://127.0.0.1:8080/travel/api/admin/user/find?id=${id}`,
+        type: "get",
+        dataType: 'json',
+        contentType: "application/json",
+        success: function(res) {
+          if(res.code == 200) {
+            console.log(res);
+            user = res.data
+            toBindData(res.data)
+            return
           }
+          lightyear.notify('获取用户信息失败', 'danger', 100);
+        },
+        error: function(err) {
+          return lightyear.notify('获取用户信息失败', 'danger', 100);
+        }
+      })
+    }
+
+    // 绑定数据
+    function toBindData(data) {
+      $("#username").val(data.userName)
+      $("#nickName").val(data.nickName)
+      $("#age").val(data.age)
+      $("#city").val(data.city)
+      $("#introduction").val(data.introduction)
+      $(`input:radio[name=role][value=${data.role}]`).attr("checked",true)
+      $(`input:radio[name=sex][value=${data.sex}]`).attr("checked",true)
+      $(`#status`).attr("checked", data.status == 1)
+    }
+
+    function toSubmit() {
+      let data = {
+        id: user.id,
+        userName: $("#username").val(),
+        nickName: $("#nickName").val(),
+        role: $("#role").val(),
+        age: $("#age").val(),
+        city: $("#city").val(),
+        sex: $("#sex").val(),
+        status: $("#status").prop("checked") ? 1:0,
+        introduction: $("#introduction").val()
+      }
+      if($("#password").val() != null) {
+        data.password = $("#password").val()
+      }
+      if(data.username == "" || data.nickName == "") {
+        return lightyear.notify('请填写必填项', 'danger', 100);
+      }
+      $.ajax({
+        url: `http://127.0.0.1:8080/travel/api/admin/user/update`,
+        type: "post",
+        dataType: 'json',
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function(res) {
+          if(res.code == 200) {
+            console.log(res);
+            lightyear.notify('修改用户成功', 'success', 100);
+            setTimeout(function() {
+              history.back(-1);
+            },1500)
+            return
+          }
+          lightyear.notify('修改用户失败', 'danger', 100);
+        },
+        error: function(err) {
+          return lightyear.notify('修改用户失败', 'danger', 100);
+        }
       })
     }
   </script>

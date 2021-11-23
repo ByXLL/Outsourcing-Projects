@@ -242,15 +242,15 @@
                 <div class="tab-pane active">
                   
                   <form action="javascript:;" name="edit-form" class="edit-form">
-                    <div class="form-group">
+                    <div class="form-group has-error">
                       <label for="web_site_title">用户名</label>
                       <input class="form-control" type="text" id="username" name="username" value="" placeholder="请输入用户名" >
                     </div>
-                    <div class="form-group">
+                    <div class="form-group has-error">
                       <label for="web_site_title">昵称</label>
                       <input class="form-control" type="text" id="nickName" name="nickName" value="" placeholder="请输入昵称" >
                     </div>
-                    <div class="form-group">
+                    <div class="form-group has-error">
                       <label for="web_site_title">密码</label>
                       <input class="form-control" type="password" id="password" name="password" value="" placeholder="请输入密码" >
                     </div>
@@ -289,7 +289,7 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <button type="button" class="btn btn-primary m-r-5">确 定</button>
+                      <button type="button" class="btn btn-primary m-r-5" onclick="addUser()">确 定</button>
                       <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
                     </div>
                   </form>
@@ -316,7 +316,42 @@
   <script src="js/common.js"></script>
 
   <script type="text/javascript">
-
+    function addUser() {
+      let data = {
+        userName: $("#username").val(),
+        nickName: $("#nickName").val(),
+        password: $("#password").val(),
+        role: $("#role").val(),
+        age: $("#age").val(),
+        city: $("#city").val(),
+        sex: $("#sex").val(),
+        introduction: $("#introduction").val()
+      }
+      if(data.username == "" || data.nickName == "" || data.password == "") {
+        return lightyear.notify('请填写必填项', 'danger', 100);
+      }
+      $.ajax({
+        url: `http://127.0.0.1:8080/travel/api/admin/user/add`,
+        type: "post",
+        dataType: 'json',
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function(res) {
+          if(res.code == 200) {
+            console.log(res);
+            lightyear.notify('新增用户成功', 'success', 100);
+            setTimeout(function() {
+              history.back(-1);
+            },1500)
+            return
+          }
+          lightyear.notify('新增用户失败', 'danger', 100);
+        },
+        error: function(err) {
+          return lightyear.notify('新增用户失败', 'danger', 100);
+        }
+      })
+    }
     
   </script>
 </body>

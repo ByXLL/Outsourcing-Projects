@@ -343,18 +343,17 @@
             <td>${item.nickName}</td>
             <td>${item.introduction}</td>
             <td>${item.role == 1 ? '<span class="label label-primary">管理员</span>' : '<span class="label label-info">普通用户</span>'}</td>
-            <td>${item.status == 1 ? '<font class="text-success">正常</font' : '<font class="text-danger"></font'}></td>
+            <td>${item.status == 1 ? '<font class="text-success">正常</font' : '<font class="text-danger">禁用</font'}></td>
             <td>
               <div class="btn-group ">
-                <a class="btn btn-sm btn-info" href="#!" title="查看" data-toggle="tooltip" onclick="showItem(${index}, ${item.id})"><i class="mdi mdi-eye"></i>查看</a>
                 <a class="btn btn-sm btn-warning" href="#!" title="编辑" data-toggle="tooltip" onclick="editItem(${index},${item.id})"><i class="mdi mdi-pencil"></i>编辑</a>
                 <a class="btn btn-sm btn-danger" href="#!" title="删除" data-toggle="tooltip" onclick="delItem(${index},${item.id})"><i class="mdi mdi-window-close">删除</i></a>
               </div>
             </td>
           </tr>
         `
+        //                 <a class="btn btn-sm btn-info" href="#!" title="查看" data-toggle="tooltip" onclick="showItem(${index}, ${item.id})"><i class="mdi mdi-eye"></i>查看</a>
         $("#data-table").append(htmlTemplate)
-        console.log(item);
       })
     }
 
@@ -363,30 +362,49 @@
     }
 
     function editItem(index,data) {
-      window.location.href = 'user-update.html?id=1'
-      console.log(index,data)
+      window.location.href = `user-update.html?id=${data}`
     }
 
     function delItem(index,data) {
-      console.log(index,data)
       $.confirm({
-          title: '错误提示',
-          content: '笑江湖浪迹十年游，空负少年头。对铜驼巷陌，吟情渺渺，心事悠悠！酒冷诗残梦断，南国正清秋。',
+          title: '警告',
+          content: '是否删除该用户，删除后不可恢复!',
           type: 'red',
           typeAnimated: true,
           buttons: {
               tryAgain: {
-                  text: '重试',
-                  btnClass: 'btn-red',
-                  action: function(){
-                  }
+                text: '确定',
+                btnClass: 'btn-red',
+                action: function(){
+                  delUser(data)
+                }
               },
               close: {
-                  text: '关闭'
+                text: '关闭'
               }
           }
       });
     }
+
+    function delUser(id) {
+      $.ajax({
+        url: `http://127.0.0.1:8080/travel/api/admin/user/del?id=${id}`,
+        type: "post",
+        dataType: 'json',
+        contentType: "application/json",
+        success: function(res) {
+          if(res.code == 200) {
+            getUserList()
+            return lightyear.notify('新增用户成功', 'success', 100);
+          }
+          lightyear.notify('获取用户列表失败', 'danger', 100);
+        },
+        error: function(err) {
+          return lightyear.notify('获取用户列表失败', 'danger', 100);
+        }
+      })
+    }
+      
   </script>
 </body>
 </html>

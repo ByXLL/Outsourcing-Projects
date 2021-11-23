@@ -68,6 +68,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         user.setPassword(CommUtils.getMd5(user.getPassword()));
         user.setRole(2);
         user.setStatus(1);
+        User oldUser = userMapper.selectOne(new QueryWrapper<User>().eq("user_name", user.getUserName()));
+        if(oldUser != null) { return new ApiResult(HttpCodeEnum.ERROR.getCode(),"操作失败,该用户名已存在"); }
         int i = userMapper.insert(user);
         if(i>0) { return new ApiResult(HttpCodeEnum.SUCCESS.getCode(),"添加用户成功");}
         return new ApiResult(HttpCodeEnum.ERROR.getCode(),"操作失败");
