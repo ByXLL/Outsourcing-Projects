@@ -6,9 +6,9 @@
 
 $.ajaxSetup({
   aysnc: false,
-  dataType: "JSON",
+  // dataType: "JSON",
   headers: {
-    "Content-Type": "application/json",
+    // "Content-Type": "application/json",
     token: window.localStorage.getItem("token") || "",
   },
   dataFilter: function(data,type) {

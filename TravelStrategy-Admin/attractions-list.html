@@ -8,6 +8,7 @@
 <link href="css/bootstrap.min.css" rel="stylesheet" />
 <link href="css/materialdesignicons.min.css" rel="stylesheet" />
 <link href="css/style.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="js/jconfirm/jquery-confirm.min.css">
 </head>
   
 <body>
@@ -232,23 +233,176 @@
       <!--End 头部信息-->
       <!--页面主要内容-->
       <main class="lyear-layout-content">
-        <div class="container-fluid p-t-15">
-          
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-toolbar clearfix">
+                  <div class="pull-right search-bar">
+                    <div class="input-group">
+                      <input type="text" id="attractionName" class="form-control" value="" placeholder="请输入景点名称">
+                      <div class="input-group-btn">
+                        <a class="btn btn-info m-r-5" href="javascript:;" onclick="getAttractions()">搜索</a>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="toolbar-btn-action">
+                    <a class="btn btn-primary m-r-5" href="attractions-add.html"><i class="mdi mdi-plus"></i> 新增</a>
+                  </div>
+                </div>
+                <div class="card-body">
+                  
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>编号</th>
+                          <th>景点名称</th>
+                          <th>封面图</th>
+                          <th>票价</th>
+                          <th>城市</th>
+                          <th>星级</th>
+                          <th>操作</th>
+                        </tr>
+                      </thead>
+                      <tbody id="data-table"> </tbody>
+                    </table>
+                  </div>
+                  <ul id="pagination" class="pagination"></ul>
+                </div>
+              </div>
+            </div>
+            
+          </div>
           
         </div>
+        
       </main>
+      <!--End 页面主要内容-->
+    </div>
   </div>
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/main.min.js"></script>
   <script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
   <script src="js/bootstrap-notify.min.js"></script>
+  <script src="js/jconfirm/jquery-confirm.min.js"></script>
   <script type="text/javascript" src="js/lightyear.js"></script>
   <script src="js/common.js"></script>
+  <script src="js/extendPagination.js"></script>
 
   <script type="text/javascript">
+    let dataList = []
+    let pageIndex = 1
+    function getAttractions() {
+      let payload = {
+        name: $("#attractionName").val()
+      }
+      $.ajax({
+        url: `http://127.0.0.1:8080/travel/api/admin/attractions/findPagerByParam?page=${pageIndex}&pageSize=10`,
+        type: "post",
+        dataType: 'json',
+        contentType: "application/json",
+        data: JSON.stringify(payload),
+        success: function(res) {
+          if(res.code == 200) {
+            console.log(res);
+            var currentPage = res.data.current;
+            var totalPages = res.data.pages;
+            $("#pagination").bootstrapPaginator({
+                bootstrapMajorVersion:3, 
+                currentPage: currentPage, //当前页数
+                numberOfPages: 10, //每次显示页数
+                totalPages:totalPages < 1 ? 1 : totalPages, //总页数
+                shouldShowPage:true,//是否显示该按钮
+                useBootstrapTooltip:false,
+                onPageClicked: function (event, originalEvent, type, page) {
+                  pageIndex = page
+                  getAttractions()
+                }
+            });
+            dataList = res.data.records
+            toBindData(res.data.records)
+            return
+          }
+          lightyear.notify('景点信息列表获取失败', 'danger', 100);
+        },
+        error: function(err) {
+          return lightyear.notify('景点信息列表获取失败', 'danger', 100);
+        }
+      })
+    }
+    getAttractions()
 
-    
+    function toBindData(data) {
+      $("#data-table").html('')
+      $.each(data,function(index,item) {
+        let htmlTemplate = `
+          <tr>
+            <td>${item.id}</td>
+            <td>${item.name}</td>
+            <td>${item.coverPic}</td>
+            <td>${item.city}</td>
+            <td>${item.fare}</td>
+            <td>${item.starRating}</td>
+            <td>
+              <div class="btn-group">
+                <a class="btn btn-sm btn-warning" href="#!" title="编辑" data-toggle="tooltip" onclick="editItem(${index},${item.id})"><i class="mdi mdi-pencil"></i>编辑</a>
+                <a class="btn btn-sm btn-danger" href="#!" title="删除" data-toggle="tooltip" onclick="delItem(${index},${item.id})"><i class="mdi mdi-window-close">删除</i></a>
+              </div>
+            </td>
+          </tr>
+        `
+        $("#data-table").append(htmlTemplate)
+      })
+    }
+
+
+    function editItem(index,data) {
+      window.location.href = `attractions-edit.html?id=${data}`
+    }
+
+    function delItem(index,data) {
+      $.confirm({
+          title: '警告',
+          content: '是否删除该景点，删除后不可恢复!',
+          type: 'red',
+          typeAnimated: true,
+          buttons: {
+              tryAgain: {
+                text: '确定',
+                btnClass: 'btn-red',
+                action: function(){
+                  delAttraction(data)
+                }
+              },
+              close: {
+                text: '关闭'
+              }
+          }
+      });
+    }
+
+    function delAttraction(id) {
+      $.ajax({
+        url: `http://127.0.0.1:8080/travel/api/admin/attractions/del?id=${id}`,
+        type: "post",
+        dataType: 'json',
+        contentType: "application/json",
+        success: function(res) {
+          if(res.code == 200) {
+            getAttractions()
+            return lightyear.notify('删除成功', 'success', 100);
+          }
+          lightyear.notify('删除失败', 'danger', 100);
+        },
+        error: function(err) {
+          return lightyear.notify('删除失败', 'danger', 100);
+        }
+      })
+    }
+      
   </script>
 </body>
 </html>

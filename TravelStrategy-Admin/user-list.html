@@ -231,57 +231,52 @@
         </nav>
       </header>
       <!--End 头部信息-->
-    <!--页面主要内容-->
-    <main class="lyear-layout-content">
-      
-      <div class="container-fluid">
-        
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="card-toolbar clearfix">
-                <div class="pull-right search-bar">
-                  <div class="input-group">
-                    <input type="text" id="nickName" class="form-control" value="" placeholder="请输入用户昵称">
-                    <div class="input-group-btn">
-                      <a class="btn btn-info m-r-5" href="javascript:;" onclick="getUserList()">搜索</a>
+      <!--页面主要内容-->
+      <main class="lyear-layout-content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-toolbar clearfix">
+                  <div class="pull-right search-bar">
+                    <div class="input-group">
+                      <input type="text" id="nickName" class="form-control" value="" placeholder="请输入用户昵称">
+                      <div class="input-group-btn">
+                        <a class="btn btn-info m-r-5" href="javascript:;" onclick="getUserList()">搜索</a>
 
+                      </div>
                     </div>
                   </div>
+                  <div class="toolbar-btn-action">
+                    <a class="btn btn-primary m-r-5" href="user-add.html"><i class="mdi mdi-plus"></i> 新增</a>
+                  </div>
                 </div>
-                <div class="toolbar-btn-action">
-                  <a class="btn btn-primary m-r-5" href="user-add.html"><i class="mdi mdi-plus"></i> 新增</a>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>编号</th>
+                          <th>用户名</th>
+                          <th>昵称</th>
+                          <th>描述</th>
+                          <th>角色</th>
+                          <th>状态</th>
+                          <th>操作</th>
+                        </tr>
+                      </thead>
+                      <tbody id="data-table"> </tbody>
+                    </table>
+                  </div>
+                  <ul id="pagination" class="pagination"></ul>
                 </div>
-              </div>
-              <div class="card-body">
-                
-                <div class="table-responsive">
-                  <table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th>编号</th>
-                        <th>用户名</th>
-                        <th>昵称</th>
-                        <th>描述</th>
-                        <th>角色</th>
-                        <th>状态</th>
-                        <th>操作</th>
-                      </tr>
-                    </thead>
-                    <tbody id="data-table"> </tbody>
-                  </table>
-                </div>
-                <ul id="pagination" class="pagination"></ul>
               </div>
             </div>
           </div>
-          
         </div>
-        
-      </div>
-      
-    </main>
-    <!--End 页面主要内容-->
+      </main>
+      <!--End 页面主要内容-->
+    </div>
   </div>
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -313,7 +308,7 @@
                 bootstrapMajorVersion:3, 
                 currentPage: currentPage, //当前页数
                 numberOfPages: 10, //每次显示页数
-                totalPages:totalPages, //总页数
+                totalPages:totalPages < 1 ? 1 : totalPages, //总页数
                 shouldShowPage:true,//是否显示该按钮
                 useBootstrapTooltip:false,
                 onPageClicked: function (event, originalEvent, type, page) {
@@ -324,10 +319,10 @@
             toBindData(res.data.records)
             return
           }
-          lightyear.notify('获取用户列表失败', 'danger', 100);
+          lightyear.notify('获取用户列表获取失败', 'danger', 100);
         },
         error: function(err) {
-          return lightyear.notify('获取用户列表失败', 'danger', 100);
+          return lightyear.notify('获取用户列表获取失败', 'danger', 100);
         }
       })
     }
@@ -362,7 +357,7 @@
     }
 
     function editItem(index,data) {
-      window.location.href = `user-update.html?id=${data}`
+      window.location.href = `user-edit.html?id=${data}`
     }
 
     function delItem(index,data) {
@@ -395,12 +390,12 @@
         success: function(res) {
           if(res.code == 200) {
             getUserList()
-            return lightyear.notify('新增用户成功', 'success', 100);
+            return lightyear.notify('删除用户成功', 'success', 100);
           }
-          lightyear.notify('获取用户列表失败', 'danger', 100);
+          lightyear.notify('删除用户失败', 'danger', 100);
         },
         error: function(err) {
-          return lightyear.notify('获取用户列表失败', 'danger', 100);
+          return lightyear.notify('删除用户失败', 'danger', 100);
         }
       })
     }

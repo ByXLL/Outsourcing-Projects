@@ -4,7 +4,7 @@
     <select id="selectRaidersDetails" resultType="com.mali.travelstrategy.vo.RaidersDetailsVO">
         select (
             select count(1)
-            from raiders_start as rs
+            from raiders_stat as rs
             where rs.raiders_id = raiders.id
         ) as `start_count`, raiders .*, user.avatar
         from raiders inner join user on author_id = user.id

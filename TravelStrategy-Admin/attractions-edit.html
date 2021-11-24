@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>攻略列表</title>
+<title>编辑景点</title>
 <link rel="icon" href="favicon.ico" type="image/ico" />
 <link href="css/bootstrap.min.css" rel="stylesheet" />
 <link href="css/materialdesignicons.min.css" rel="stylesheet" />
 <link href="css/style.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="js/jconfirm/jquery-confirm.min.css">
+
 </head>
   
 <body>
@@ -33,17 +34,17 @@
                   <li><a href="user-add.html">新增用户</a></li>
                 </ul>
               </li>
-              <li class="nav-item nav-item-has-subnav">
+              <li class="nav-item nav-item-has-subnav open">
                 <a href="javascript:void(0)"><i class="mdi mdi-format-align-justify"></i> 景点信息管理</a>
                 <ul class="nav nav-subnav">
-                  <li><a href="attractions-list.html">景点列表</a></li>
+                  <li class="active"><a href="attractions-list.html">景点列表</a></li>
                   <li><a href="attractions-add.html">新增景点</a></li>
                 </ul>
               </li>
-              <li class="nav-item nav-item-has-subnav open">
+              <li class="nav-item nav-item-has-subnav">
                 <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 攻略管理</a>
                 <ul class="nav nav-subnav">
-                  <li class="active"><a href="raiders-list.html">攻略列表</a></li>
+                  <li><a href="raiders-list.html">攻略列表</a></li>
                   <li><a href="raiders-add.html">新增攻略</a></li>
                 </ul>
               </li>
@@ -237,46 +238,95 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="card">
-                <div class="card-toolbar clearfix">
-                  <div class="pull-right search-bar">
-                    <div class="input-group">
-                      <input type="text" id="raidersName" class="form-control" value="" placeholder="请输入攻略名称">
-                      <div class="input-group-btn">
-                        <a class="btn btn-info m-r-5" href="javascript:;" onclick="getRaiders()">搜索</a>
-
+                <div class="tab-content">
+                  <div class="tab-pane active">
+                    
+                    <form action="javascript:;" name="edit-form" class="edit-form">
+                      <div class="form-group has-error">
+                        <label for="web_site_title">景点名称</label>
+                        <input class="form-control" type="text" id="name" name="name" value="" placeholder="请输入景点名称" >
                       </div>
-                    </div>
+                      <div class="form-group">
+                        <label for="web_site_title">票价</label>
+                        <input class="form-control" type="text" id="fare" name="fare" value="" placeholder="请输入票价" >
+                      </div>
+                      <div class="form-group">
+                        <label for="web_site_title">星级</label>
+                        <input class="form-control" type="text" id="starRating" name="starRating" value="" placeholder="请输入星级" >
+                      </div>
+                      <div class="form-group">
+                        <label for="web_site_title">城市</label>
+                        <input class="form-control" type="text" id="city" name="city" value="" placeholder="请输入城市" >
+                      </div>
+
+                      <div class="form-group">
+                        <label>封面图</label>
+                        <div class="form-controls">
+                          <ul id="coverPic" class="list-inline clearfix lyear-uploads-pic">
+                            <li class="col-xs-4 col-sm-3 col-md-2">
+                              <figure>
+                                <img src="images/gallery/17.jpg" alt="图片三">
+                                <figcaption>
+                                  <a class="btn btn-round btn-square btn-danger" href="#!"><i class="mdi mdi-delete"></i></a>
+                                </figcaption>
+                              </figure>
+                            </li>
+                            <li class="col-xs-4 col-sm-3 col-md-2">
+                              <!-- <button class="pic-add" type="file" href="javascript:;"></button> -->
+                              <input type="file" id="file-input"></input>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>图片列表</label>
+                        <div class="form-controls">
+                          <ul id="pics" class="list-inline clearfix lyear-uploads-pic">
+                            <li class="col-xs-4 col-sm-3 col-md-2">
+                              <figure>
+                                <img src="images/gallery/15.jpg" alt="图片一">
+                                <figcaption>
+                                  <a class="btn btn-round btn-square btn-danger" href="#!"><i class="mdi mdi-delete"></i></a>
+                                </figcaption>
+                              </figure>
+                            </li>
+                            <li class="col-xs-4 col-sm-3 col-md-2">
+                              <figure>
+                                <img src="images/gallery/16.jpg" alt="图片二">
+                                <figcaption>
+                                  <a class="btn btn-round btn-square btn-danger" href="#!"><i class="mdi mdi-delete"></i></a>
+                                </figcaption>
+                              </figure>
+                            </li>
+                            <li class="col-xs-4 col-sm-3 col-md-2">
+                              <figure>
+                                <img src="images/gallery/17.jpg" alt="图片三">
+                                <figcaption>
+                                  <a class="btn btn-round btn-square btn-danger" href="#!"><i class="mdi mdi-delete"></i></a>
+                                </figcaption>
+                              </figure>
+                            </li>
+                            <li class="col-xs-4 col-sm-3 col-md-2">
+                              <a class="pic-add" id="add-pic-btn" href="#!" title="点击上传"></a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="form-group has-error">
+                        <label for="web_site_description">正文信息</label>
+                        <div id="editor"></div>
+                      </div>
+                      <div class="form-group">
+                        <button type="button" class="btn btn-primary m-r-5" onclick="editAttractions()">确 定</button>
+                        <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
+                      </div>
+                    </form>
                   </div>
-                  <div class="toolbar-btn-action">
-                    <a class="btn btn-primary m-r-5" href="raiders-add.html"><i class="mdi mdi-plus"></i> 新增</a>
-                  </div>
-                </div>
-                <div class="card-body">
-                  
-                  <div class="table-responsive">
-                    <table class="table table-bordered">
-                      <thead>
-                        <tr>
-                          <th>编号</th>
-                          <th>攻略标题</th>
-                          <th>作者名字</th>
-                          <th>封面图</th>
-                          <th>点赞个数</th>
-                          <th>操作</th>
-                        </tr>
-                      </thead>
-                      <tbody id="data-table"> </tbody>
-                    </table>
-                  </div>
-                  <ul id="pagination" class="pagination"></ul>
                 </div>
               </div>
             </div>
-            
           </div>
-          
         </div>
-        
       </main>
       <!--End 页面主要内容-->
     </div>
@@ -286,124 +336,109 @@
   <script type="text/javascript" src="js/main.min.js"></script>
   <script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
   <script src="js/bootstrap-notify.min.js"></script>
-  <script src="js/jconfirm/jquery-confirm.min.js"></script>
   <script type="text/javascript" src="js/lightyear.js"></script>
   <script src="js/common.js"></script>
-  <script src="js/extendPagination.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
   <script type="text/javascript">
-    let dataList = []
-    let pageIndex = 1
-    function getRaiders() {
-      let payload = {
-        title: $("#raidersName").val()
-      }
+    const E = window.wangEditor
+    const editor = new E("#editor")
+    editor.config.height = 500
+    editor.create()
+  </script>
+  <script type="text/javascript">
+    $("#file-input").on("change", function(e) {
+        console.log(`文件名称：${e.target.value}`);
+        let formData = new FormData();
+        formData.append("file", this.files[0]);
+        $.ajax({
+          url: `http://127.0.0.1:8080/travel/api/admin/upload`,
+          type: "post",
+          processData: false,  // 不处理数据
+          contentType: false,   // 不设置内容类型
+          data: formData,
+          success: function(res) {
+            if(res.code == 200) {
+              console.log(res);
+              lightyear.notify('图片上传成功', 'success', 100);
+              return
+            }
+            lightyear.notify('图片上传失败', 'danger', 100);
+          },
+          error: function(err) {
+            return lightyear.notify('图片上传失败', 'danger', 100);
+          }
+        })
+    });
+    
+
+    let attractionData = {}
+    getAttractionInfo()
+    function getAttractionInfo() {
+      let id = queryURLParameter(window.location.href).id
       $.ajax({
-        url: `http://127.0.0.1:8080/travel/api/admin/raiders/searchByPager?page=${pageIndex}&pageSize=10`,
-        type: "post",
+        url: `http://127.0.0.1:8080/travel/api/admin/attractions/findById?id=${id}`,
+        type: "get",
         dataType: 'json',
         contentType: "application/json",
-        data: JSON.stringify(payload),
         success: function(res) {
           if(res.code == 200) {
             console.log(res);
-            var currentPage = res.data.current;
-            var totalPages = res.data.pages;
-            $("#pagination").bootstrapPaginator({
-                bootstrapMajorVersion:3, 
-                currentPage: currentPage, //当前页数
-                numberOfPages: 10, //每次显示页数
-                totalPages:totalPages < 1 ? 1 : totalPages, //总页数
-                shouldShowPage:true,//是否显示该按钮
-                useBootstrapTooltip:false,
-                onPageClicked: function (event, originalEvent, type, page) {
-                  pageIndex = page
-                  getRaiders()
-                }
-            });
-            dataList = res.data.records
-            toBindData(res.data.records)
+            attractionData = res.data
+            toBindData(res.data)
             return
           }
-          lightyear.notify('攻略信息列表获取失败', 'danger', 100);
+          lightyear.notify('获取景点信息失败', 'danger', 100);
         },
         error: function(err) {
-          return lightyear.notify('攻略信息列表获取失败', 'danger', 100);
+          return lightyear.notify('获取景点信息失败', 'danger', 100);
         }
       })
     }
-    getRaiders()
 
+    // 绑定数据
     function toBindData(data) {
-      $("#data-table").html('')
-      $.each(data,function(index,item) {
-        let htmlTemplate = `
-          <tr>
-            <td>${item.id}</td>
-            <td>${item.title}</td>
-            <td>${item.author}</td>
-            <td>${item.coverPic}</td>
-            <td>${item.startCount}</td>
-            <td>
-              <div class="btn-group">
-                <a class="btn btn-sm btn-warning" href="#!" title="编辑" data-toggle="tooltip" onclick="editItem(${index},${item.id})"><i class="mdi mdi-pencil"></i>编辑</a>
-                <a class="btn btn-sm btn-danger" href="#!" title="删除" data-toggle="tooltip" onclick="delItem(${index},${item.id})"><i class="mdi mdi-window-close">删除</i></a>
-              </div>
-            </td>
-          </tr>
-        `
-        $("#data-table").append(htmlTemplate)
-      })
+      $("#name").val(data.name)
+      $("#fare").val(data.fare)
+      $("#starRating").val(data.starRating)
+      $("#city").val(data.city)
+      editor.txt.html(data.content)
     }
 
-
-    function showItem(index,data) {
-      console.log(index,data);
-    }
-
-    function editItem(index,data) {
-      window.location.href = `raiders-edit.html?id=${data}`
-    }
-
-    function delItem(index,data) {
-      $.confirm({
-          title: '警告',
-          content: '是否删除该景点，删除后不可恢复!',
-          type: 'red',
-          typeAnimated: true,
-          buttons: {
-              tryAgain: {
-                text: '确定',
-                btnClass: 'btn-red',
-                action: function(){
-                  delRaiders(data)
-                }
-              },
-              close: {
-                text: '关闭'
-              }
-          }
-      });
-    }
-
-    function delRaiders(id) {
+    function editAttractions() {
+      let data = {
+        name: $("#name").val(),
+        coverPic: '',
+        pic: '',
+        content: editor.txt.html(),
+        fare: $("#fare").val(),
+        city: $("#city").val(),
+        starRating: $("#starRating").val()
+      }
+      if(data.name == "" || data.content == "") {
+        return lightyear.notify('请填写必填项', 'danger', 100);
+      }
       $.ajax({
-        url: `http://127.0.0.1:8080/travel/api/admin/raiders/del?id=${id}`,
+        url: `http://127.0.0.1:8080/travel/api/admin/attractions/add`,
         type: "post",
         dataType: 'json',
         contentType: "application/json",
+        data: JSON.stringify(data),
         success: function(res) {
           if(res.code == 200) {
-            getRaiders()
-            return lightyear.notify('删除成功', 'success', 100);
+            console.log(res);
+            lightyear.notify('编辑景点信息成功', 'success', 100);
+            setTimeout(function() {
+              history.back(-1);
+            },1500)
+            return
           }
-          lightyear.notify('删除失败', 'danger', 100);
+          lightyear.notify('编辑景点信息失败', 'danger', 100);
         },
         error: function(err) {
-          return lightyear.notify('删除失败', 'danger', 100);
+          return lightyear.notify('新增景点信息失败', 'danger', 100);
         }
       })
     }
-      
   </script>
 </body>
 </html>
