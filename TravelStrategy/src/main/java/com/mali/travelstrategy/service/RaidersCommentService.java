@@ -24,6 +24,13 @@ public interface RaidersCommentService extends IService<RaidersComment> {
      */
     ApiResult delete(Integer id);
 
+    /**
+     * 分页查询
+     * @param page          当前页面
+     * @param pageSize      每页大小
+     * @return              响应数据
+     */
+    ApiResult findByPager(Integer page, Integer pageSize);
 
     /**
      * 通过攻略id 分页查询评论

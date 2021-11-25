@@ -28,7 +28,12 @@ public class RaidersCommentController {
         return raidersCommentService.delete(id);
     }
 
-    @GetMapping("/find")
+    @GetMapping("findByPager")
+    public ApiResult findByPager(@PathParam("page") Integer page, @PathParam("pageSize") Integer pageSize) {
+        return raidersCommentService.findByPager(page, pageSize);
+    }
+
+    @GetMapping("/findByRaidersId")
     public ApiResult findPagerByRaidersId(@PathParam("raidersId") Integer raidersId, @PathParam("page") Integer page, @PathParam("pageSize") Integer pageSize) {
         return raidersCommentService.findPagerByRaidersId(raidersId, page, pageSize);
     }

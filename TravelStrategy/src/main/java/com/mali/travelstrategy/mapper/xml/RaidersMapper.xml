@@ -8,6 +8,6 @@
             where rs.raiders_id = raiders.id
         ) as `start_count`, raiders .*, user.avatar
         from raiders inner join user on author_id = user.id
-        <where>${ew.sqlSegment}</where>
+        ${ew.sqlSegment}
     </select>
 </mapper>

@@ -48,3 +48,15 @@ function logout() {
   window.localStorage.removeItem("userInfo");
   window.location.replace("login.html");
 }
+
+function formatDate(dateTime) {
+  var date = new Date(dateTime);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+  var year = date.getFullYear(),
+      month = ("0" + (date.getMonth() + 1)).slice(-2),
+      sdate = ("0" + date.getDate()).slice(-2),
+      hour = ("0" + date.getHours()).slice(-2),
+      minute = ("0" + date.getMinutes()).slice(-2),
+      second = ("0" + date.getSeconds()).slice(-2);
+  var result = year + "-"+ month +"-"+ sdate +" "+ hour +":"+ minute +":" + second
+  return result
+}

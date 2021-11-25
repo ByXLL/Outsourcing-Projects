@@ -3,6 +3,6 @@
 <mapper namespace="com.mali.travelstrategy.mapper.UserMapper">
     <select id="selectUserList" resultType="com.mali.travelstrategy.vo.UserVO">
         select * from user
-        <where>${ew.sqlSegment}</where>
+        ${ew.sqlSegment}
     </select>
 </mapper>

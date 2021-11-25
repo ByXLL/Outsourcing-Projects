@@ -51,6 +51,22 @@ public class RaidersCommentServiceImpl extends ServiceImpl<RaidersCommentMapper,
     }
 
     /**
+     * 分页查询
+     *
+     * @param page     当前页面
+     * @param pageSize 每页大小
+     * @return 响应数据
+     */
+    @Override
+    public ApiResult findByPager(Integer page, Integer pageSize) {
+        if(page == null || pageSize == null) { return new ApiResult(HttpCodeEnum.ARG_ERROR.getCode(), "参数异常"); }
+        QueryWrapper<RaidersCommentVO> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("rc.create_time");
+        IPage<RaidersCommentVO> commentDetails = raidersCommentMapper.selectRaidersCommentDetails(new Page<>(page, pageSize), queryWrapper);
+        return new ApiResult(HttpCodeEnum.SUCCESS.getCode(), "操作成功", commentDetails);
+    }
+
+    /**
      * 通过攻略id 分页查询评论
      * @param raidersId 攻略id
      * @param page      当前页码
@@ -62,7 +78,7 @@ public class RaidersCommentServiceImpl extends ServiceImpl<RaidersCommentMapper,
         if(raidersId == null || page == null || pageSize == null) { return new ApiResult(HttpCodeEnum.ARG_ERROR.getCode(), "参数异常"); }
         QueryWrapper<RaidersCommentVO> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("raiders_id",raidersId);
-        queryWrapper.orderByDesc("create_time");
+        queryWrapper.orderByDesc("rc.create_time");
         IPage<RaidersCommentVO> commentDetails = raidersCommentMapper.selectRaidersCommentDetails(new Page<>(page, pageSize), queryWrapper);
         return new ApiResult(HttpCodeEnum.SUCCESS.getCode(), "操作成功", commentDetails);
     }

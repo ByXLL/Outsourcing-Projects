@@ -295,7 +295,8 @@
     let pageIndex = 1
     function getRaiders() {
       let payload = {
-        title: $("#raidersName").val()
+        title: $("#raidersName").val(),
+        selectType: 3
       }
       $.ajax({
         url: `http://127.0.0.1:8080/travel/api/admin/raiders/searchByPager?page=${pageIndex}&pageSize=10`,
@@ -367,7 +368,7 @@
     function delItem(index,data) {
       $.confirm({
           title: '警告',
-          content: '是否删除该景点，删除后不可恢复!',
+          content: '是否删除该攻略，删除后不可恢复!',
           type: 'red',
           typeAnimated: true,
           buttons: {

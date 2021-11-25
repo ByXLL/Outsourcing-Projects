@@ -12,6 +12,12 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class RaidersCommentVO extends RaidersComment {
+    @ApiModelProperty(value = "攻略标题")
+    private String title;
+
+    @ApiModelProperty(value = "攻略作者")
+    private String author;
+
     @ApiModelProperty(value = "评论人昵称")
     private String nickName;
 
