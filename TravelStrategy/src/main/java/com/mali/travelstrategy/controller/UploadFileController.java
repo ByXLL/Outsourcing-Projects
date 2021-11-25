@@ -77,9 +77,10 @@ public class UploadFileController {
         String fileName = file.getOriginalFilename();
         String rawFileName = StringUtils.substringBefore(fileName, ".");
         String fileType = StringUtils.substringAfter(fileName, ".");
-        String localFilePath = StringUtils.appendIfMissing(fileTempPath, "/") + System.currentTimeMillis() + "." + fileType;
+        String newFileName = System.currentTimeMillis() + "." + fileType;
+        String localFilePath = StringUtils.appendIfMissing(fileTempPath, "/") + newFileName;
         String serverUrl = serverConfig.getUrl();
-        String serverFilePath = serverUrl + contextPath +"/" + System.currentTimeMillis() + "." + fileType;
+        String serverFilePath = serverUrl + contextPath +"/" + newFileName;
         System.out.println(serverUrl);
 //        String localFilePath = StringUtils.appendIfMissing(serverUrl, "/") + System.currentTimeMillis() + "." + fileType;
 
@@ -95,6 +96,7 @@ public class UploadFileController {
         HashMap<String, Object> fileInfo = new HashMap<>(16);
         fileInfo.put("fileName",fileName);
         fileInfo.put("filePath",serverFilePath);
+        System.out.println(serverFilePath);
         return new ApiResult(HttpCodeEnum.SUCCESS.getCode(), "文件上传成功", fileInfo);
     }
 

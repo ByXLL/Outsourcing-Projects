@@ -3,6 +3,9 @@
 //   xhr.setRequestHeader('Content-Type','application/json')
 //   xhr.setRequestHeader('token',token);
 // }
+let tempUserInfo = JSON.parse(window.localStorage.getItem('userInfo') || '{}')
+$("#userAvatar").attr('src',tempUserInfo.avatar)
+$("#loginName").text(tempUserInfo.userName)
 
 $.ajaxSetup({
   aysnc: false,
@@ -59,4 +62,17 @@ function formatDate(dateTime) {
       second = ("0" + date.getSeconds()).slice(-2);
   var result = year + "-"+ month +"-"+ sdate +" "+ hour +":"+ minute +":" + second
   return result
+}
+
+function createImgDom(filePath) {
+  let tempHtml = `
+        <li class="col-xs-4 col-sm-3 col-md-2">
+          <figure>
+            <img id="coverPic" src="${filePath}" alt="">
+            <figcaption>
+              <a class="btn btn-round btn-square btn-danger" href="javascript:;" onclick="$(this).parent().parent().parent().remove()"><i class="mdi mdi-delete"></i></a>
+            </figcaption>
+          </figure>
+        </li>`
+  return tempHtml      
 }

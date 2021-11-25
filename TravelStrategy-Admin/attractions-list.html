@@ -75,8 +75,8 @@
             <ul class="topbar-right">
               <li class="dropdown dropdown-profile">
                 <a href="javascript:void(0)" data-toggle="dropdown">
-                  <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="" />
-                  <span>Admin <span class="caret"></span></span>
+                  <img id="userAvatar" class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="" />
+                  <span id="loginName">Admin <span class="caret"></span></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li>
@@ -341,7 +341,7 @@
           <tr>
             <td>${item.id}</td>
             <td>${item.name}</td>
-            <td>${item.coverPic}</td>
+            <td><img style="width:150px; height:90px" src="${item.coverPic}"></td>
             <td>${item.city}</td>
             <td>${item.fare}</td>
             <td>${item.starRating}</td>

@@ -76,8 +76,8 @@
             <ul class="topbar-right">
               <li class="dropdown dropdown-profile">
                 <a href="javascript:void(0)" data-toggle="dropdown">
-                  <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="" />
-                  <span>Admin <span class="caret"></span></span>
+                  <img id="userAvatar" class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="" />
+                  <span id="loginName">Admin <span class="caret"></span></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li>
@@ -325,7 +325,7 @@
         role: $("#role").val(),
         age: $("#age").val(),
         city: $("#city").val(),
-        sex: $("#sex").val(),
+        sex: parseInt( $("input[name='sex']:checked").val()),
         introduction: $("#introduction").val()
       }
       if(data.username == "" || data.nickName == "" || data.password == "") {

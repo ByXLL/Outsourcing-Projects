@@ -76,8 +76,8 @@
             <ul class="topbar-right">
               <li class="dropdown dropdown-profile">
                 <a href="javascript:void(0)" data-toggle="dropdown">
-                  <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="" />
-                  <span>Admin <span class="caret"></span></span>
+                  <img id="userAvatar" class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="" />
+                  <span id="loginName">Admin <span class="caret"></span></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li>
@@ -262,18 +262,9 @@
                       <div class="form-group">
                         <label>封面图</label>
                         <div class="form-controls">
-                          <ul id="coverPic" class="list-inline clearfix lyear-uploads-pic">
+                          <ul id="coverPic-list" class="list-inline clearfix lyear-uploads-pic">
                             <li class="col-xs-4 col-sm-3 col-md-2">
-                              <figure>
-                                <img src="images/gallery/17.jpg" alt="图片三">
-                                <figcaption>
-                                  <a class="btn btn-round btn-square btn-danger" href="#!"><i class="mdi mdi-delete"></i></a>
-                                </figcaption>
-                              </figure>
-                            </li>
-                            <li class="col-xs-4 col-sm-3 col-md-2">
-                              <!-- <button class="pic-add" type="file" href="javascript:;"></button> -->
-                              <input type="file" id="file-input"></input>
+                              <input type="file" id="cover-file-input" accept="image/png,image/jpeg,image/jpg"></input>
                             </li>
                           </ul>
                         </div>
@@ -283,31 +274,7 @@
                         <div class="form-controls">
                           <ul id="pics" class="list-inline clearfix lyear-uploads-pic">
                             <li class="col-xs-4 col-sm-3 col-md-2">
-                              <figure>
-                                <img src="images/gallery/15.jpg" alt="图片一">
-                                <figcaption>
-                                  <a class="btn btn-round btn-square btn-danger" href="#!"><i class="mdi mdi-delete"></i></a>
-                                </figcaption>
-                              </figure>
-                            </li>
-                            <li class="col-xs-4 col-sm-3 col-md-2">
-                              <figure>
-                                <img src="images/gallery/16.jpg" alt="图片二">
-                                <figcaption>
-                                  <a class="btn btn-round btn-square btn-danger" href="#!"><i class="mdi mdi-delete"></i></a>
-                                </figcaption>
-                              </figure>
-                            </li>
-                            <li class="col-xs-4 col-sm-3 col-md-2">
-                              <figure>
-                                <img src="images/gallery/17.jpg" alt="图片三">
-                                <figcaption>
-                                  <a class="btn btn-round btn-square btn-danger" href="#!"><i class="mdi mdi-delete"></i></a>
-                                </figcaption>
-                              </figure>
-                            </li>
-                            <li class="col-xs-4 col-sm-3 col-md-2">
-                              <a class="pic-add" id="add-pic-btn" href="#!" title="点击上传"></a>
+                              <input type="file" id="pic-file-input" accept="image/png,image/jpeg" accept="image/png,image/jpeg,image/jpg"></input>
                             </li>
                           </ul>
                         </div>
@@ -346,11 +313,30 @@
     editor.create()
   </script>
   <script type="text/javascript">
-    $("#file-input").on("change", function(e) {
+    $("#cover-file-input").on("change", function(e) {
         console.log(`文件名称：${e.target.value}`);
         let formData = new FormData();
         formData.append("file", this.files[0]);
-        $.ajax({
+        if($('#coverPic').length > 0) {
+          return lightyear.notify('封面图片只能上传一张', 'danger', 100);
+        }
+        uploadFile(formData, function(data) {
+          $('#coverPic-list').prepend(createImgDom(data.filePath))
+          $("#cover-file-input").val('')
+        })
+    });
+
+    $("#pic-file-input").on("change", function(e) {
+        console.log(`文件名称：${e.target.value}`);
+        let formData = new FormData();
+        formData.append("file", this.files[0]);
+        uploadFile(formData, function(data) {
+          $('#pics').prepend(createImgDom(data.filePath))
+          $("#pic-file-input").val('')
+        })
+    });
+    function uploadFile(formData, callBack) {
+      $.ajax({
           url: `http://127.0.0.1:8080/travel/api/admin/upload`,
           type: "post",
           processData: false,  // 不处理数据
@@ -360,17 +346,17 @@
             if(res.code == 200) {
               console.log(res);
               lightyear.notify('图片上传成功', 'success', 100);
-              return
+              return callBack(res.data)
             }
             lightyear.notify('图片上传失败', 'danger', 100);
           },
           error: function(err) {
-            return lightyear.notify('图片上传失败', 'danger', 100);
+            lightyear.notify('图片上传失败', 'danger', 100);
+            callBack(null)
           }
         })
-    });
+    }
     
-
     let attractionData = {}
     getAttractionInfo()
     function getAttractionInfo() {
@@ -402,23 +388,38 @@
       $("#starRating").val(data.starRating)
       $("#city").val(data.city)
       editor.txt.html(data.content)
+      if(data.coverPic != '') {
+        $("#coverPic-list").prepend(createImgDom(data.coverPic))
+      }
+      if(data.pic != '') {
+        data.pic.split(',').forEach(function(item) {
+          $("#pics").prepend(createImgDom(item))
+        })
+      }
+      
     }
 
     function editAttractions() {
+      let pics = []
+      $('#pics img').each(function(index,item) {
+        pics.push($(item).attr('src'))
+      })
       let data = {
+        id: queryURLParameter(window.location.href).id,
         name: $("#name").val(),
-        coverPic: '',
-        pic: '',
+        coverPic: $('#coverPic').attr('src') ?  $('#coverPic').attr('src') : '',
+        pic: pics.toString(),
         content: editor.txt.html(),
         fare: $("#fare").val(),
         city: $("#city").val(),
         starRating: $("#starRating").val()
+        
       }
       if(data.name == "" || data.content == "") {
         return lightyear.notify('请填写必填项', 'danger', 100);
       }
       $.ajax({
-        url: `http://127.0.0.1:8080/travel/api/admin/attractions/add`,
+        url: `http://127.0.0.1:8080/travel/api/admin/attractions/edit`,
         type: "post",
         dataType: 'json',
         contentType: "application/json",

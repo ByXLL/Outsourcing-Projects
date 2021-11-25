@@ -22,6 +22,8 @@ spring:
   web:
     resources:
       static-locations: classpath:static/,file:${spring.servlet.multipart.location}
+  mvc:
+    static-path-pattern: /**
 
 mybatis-plus:
   configuration:
