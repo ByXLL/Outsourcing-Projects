@@ -1,0 +1,189 @@
+/* pages/destination/destination.wxss */
+page{
+    background-color: #eeeeee;
+}
+.go-top{
+    position: fixed;
+    bottom: 50rpx;
+    right: 50rpx;
+    background-color: #ece5e5;
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+.search{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin:0 auto;
+
+    width: 550rpx;
+    height: 56rpx;
+    border-radius: 20rpx;
+    color: #666666;
+    background-color: #ffffff;
+    font-size: 24rpx;
+
+    position: absolute;
+    top: 100rpx;
+    left: 50%;
+    margin-left: -275rpx;
+}
+
+.date{
+    width: 260rpx;
+    position: relative;  
+    top: -360rpx;
+    left: 50rpx;
+    margin-bottom: -360rpx;  /* 设置一个margin负值删除自身最初在文档流中留下的空白 */
+    color: #ffffff;
+}
+
+.gallery{
+    position: fixed;  
+    top: 220rpx;
+    right: 0rpx;
+    z-index: 999;
+    
+    width: 104rpx;
+    height: 56rpx;
+    line-height: 56rpx;
+    border-radius: 36rpx 0 0 36rpx;
+    text-align: center;
+    padding: 5rpx 10rpx 5rpx 10rpx;
+    font-size: 26rpx;
+    color: #ffffff;
+
+    background-image: linear-gradient(to right,#20dcdc , #c7e1e1);
+    opacity: 0.7;
+}
+
+.nav{
+    width: 686rpx;
+    height: 504rpx;
+    background-color: #ffffff;
+    border-radius: 20rpx;
+
+    position: relative;  
+    top: 88rpx;
+    margin-bottom: 88rpx;  /* 设置一个margin负值删除自身最初在文档流中留下的空白 */
+}
+
+/* ---- 类似太极  --start-------------------- */
+
+/* ----选中one---- */
+.left-one-active{
+    width: 343rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    border-radius: 20rpx 0 0 0;
+    background-color: #eeeeee;
+    font-size: 36rpx;
+}
+.left-two-active{
+    border-radius: 20rpx 50rpx 0 0;
+    /* box-shadow:0rpx 0rpx 0rpx 60rpx #ffffff inset; */
+    background-color: #ffffff;
+}
+.right-one{
+    width: 343rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    border-radius: 20rpx;
+    background-color: #ffffff;
+}
+.right-two{
+    border-radius: 0 20rpx 0 50rpx;
+    /* box-shadow:0rpx 0rpx 0rpx 60rpx #eeeeee inset; */
+    background-color: #eeeeee;
+}
+
+/* ----选中two---- */
+.left-one{
+    width: 343rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    border-radius: 20rpx 0 0 0;
+    background-color: #ffffff;
+}
+.left-two{
+    border-radius: 20rpx 0 50rpx 0;
+    /* box-shadow:0rpx 0rpx 0rpx 80rpx #eeeeee inset; */
+    background-color: #eeeeee;
+}
+.right-one-active{
+    width: 343rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    border-radius: 0 20rpx 0 50rpx;
+    background-color: #eeeeee;
+    font-size: 36rpx;
+}
+.right-two-active{
+    border-radius: 50rpx 20rpx 0 50rpx;
+    /* box-shadow:0rpx 0rpx 0rpx 80rpx #ffffff inset; */
+    background-color: #ffffff;
+}
+
+/* ---- 类似太极  --end-------------------- */
+
+
+.map{
+    width: 208rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    border-radius: 44rpx;
+    border:1rpx solid #eeeeee;
+}
+.select{
+    width: 400rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    color: #ffffff;
+    background-color: #31CFBE;
+    border-radius: 44rpx;
+}
+
+.focus{
+    width: 112rpx;
+    height: 44rpx;
+    line-height: 44rpx;
+    border-radius: 20rpx;
+    color: #ffffff;
+    background-color: #31CFBE;
+    margin: 6rpx auto;
+}
+
+.tourism{
+    width: 686rpx;
+    background-color: #ffffff;
+    margin: 50rpx auto;
+    border-radius:10px;
+}
+.tuxedo{
+    width: 170rpx;
+    height: 56rpx;
+    line-height: 56rpx;
+    color: #ffffff;
+    background-color: #31CFBE;
+    border-radius: 22rpx;
+    text-align: center;
+}
+.package{
+    width: 170rpx;
+    height: 56rpx;
+    line-height: 56rpx;
+    text-align: center;
+    padding-left: 60rpx;
+}
+
+.underline{
+    height: 2rpx;
+    background-color: #EEEEEE;
+    margin-bottom: 20rpx;
+}
