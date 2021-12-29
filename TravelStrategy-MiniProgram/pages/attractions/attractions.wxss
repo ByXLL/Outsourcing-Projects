@@ -1,1 +1,117 @@
-/* pages/attractions/attractions.wxss */
+/* 隐藏小程序scroll-view的滚动条 */
+::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+page{
+    background-color: #F6F6F6;
+}
+
+.search{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin:0 auto;
+    width: 550rpx;
+    height: 56rpx;
+    border-radius: 20rpx;
+    color: #666666;
+    background-color: #eeeeee;
+    font-size: 28rpx;
+}
+
+.list{
+    padding-top:30rpx;
+    padding-bottom:20rpx
+}
+.list .attractions-item{
+    width: 686rpx;
+    /* height: 240rpx; */
+    background-color: #ffffff;
+    border-radius: 10rpx;
+    margin-bottom: 30rpx;
+    box-shadow: rgb(0 0 0 / 10%) 0px 20px 15px -3px, rgb(0 0 0 / 5%) 0px 4px 6px -2px;
+}
+
+
+.title{
+    width: 190rpx;
+    height: 32rpx;
+    line-height: 32rpx;
+}
+.active{
+    font-size: 36rpx;
+}
+.scroll-view_H{
+    white-space: nowrap;
+}
+.scroll-view-item_H{
+    height: 208rpx;
+    display: inline-block;
+    padding-right: 15rpx;
+}
+.scroll-view-img{
+    width: 288rpx;
+    height: 208rpx;
+    border-radius: 10rpx;
+}
+
+.title-two{
+    width: 160rpx;
+    height: 32rpx;
+    line-height: 32rpx;
+}
+.scroll-view-item_H-two{
+    display: inline-block;
+    text-align: center;
+    margin-right: 15rpx;
+    border:1rpx solid #B5B5B5;
+    padding: 12rpx 20rpx 12rpx 20rpx;
+    border-radius: 10rpx;
+}
+.two-active{
+    background-color: #31CFBE;
+    color: #000000;
+    border:0rpx solid #B5B5B5;
+}
+.two-two-img{
+    width: 218rpx;
+    height: 144rpx;
+    border-radius: 10rpx;
+}
+
+
+.left-img{
+    width:250rpx;
+    height:160rpx;
+    border-radius:5px;
+    margin: 20rpx;
+}
+
+.right-text{
+    align-items: center;
+    justify-content: center;
+    display: block;
+    align-content: center;
+    padding: 20rpx;
+    text-align: left;
+}
+.right-text1{
+    display: block;
+    width: 100%;
+    font-size: 18px;
+    margin-bottom: 10rpx;
+}
+.right-text2{
+    display:block ;
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 10rpx;
+}
+.right-text3{
+    display:block ;
+    width: 100%;
+    font-size: 12px;
+}

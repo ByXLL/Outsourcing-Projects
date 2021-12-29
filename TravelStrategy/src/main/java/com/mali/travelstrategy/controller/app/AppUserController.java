@@ -46,7 +46,7 @@ public class AppUserController {
     }
 
     @PassTokenRequired
-    @GetMapping("/find")
+    @GetMapping("/findById")
     public ApiResult findById(@PathParam("id") Integer id) {
         return userService.findById(id);
     }

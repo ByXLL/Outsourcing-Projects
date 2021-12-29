@@ -1,2 +1,26 @@
-<!--pages/attractions/attractions.wxml-->
-<text>pages/attractions/attractions.wxml</text>
+<!-- 搜索框 -->
+<van-search
+  value="{{ inputValue }}"
+  placeholder="搜索附近酒店/景点/美食"
+  use-action-slot
+  bind:change="onSearchChange"
+  bind:search="onSearch">
+  <view slot="action" bind:tap="onSearchClick">搜索</view>
+</van-search>
+<van-dropdown-menu>
+  <van-dropdown-item value="{{ optionValue1 }}" options="{{ option1 }}" data-index="0" bind:change="changeSelect"/>
+  <van-dropdown-item value="{{ optionValue2 }}" options="{{ option2 }}" data-index="1" bind:change="changeSelect"/>
+  <van-dropdown-item value="{{ optionValue2 }}" options="{{ option2 }}" data-index="1" bind:change="changeSelect"/>
+</van-dropdown-menu>
+<view class="list">
+    <view class="d-clo margin-center attractions-item" wx:for="{{10}}" wx:key="index">
+        <view class="d-row d-jc-between">
+            <view><image class="left-img" src="{{item.imageUrlBig}}"></image></view>
+            <view class="right-text">
+                <text class="right-text1">涠洲岛</text>
+                <text class="right-text2 text-two-line">位置：广西北海市涠洲岛</text>
+                <text class="right-text3 text-two-line">【】涠洲岛详细介绍拿出你穿的那件彻底否定反复若非...</text>
+            </view>
+        </view>
+    </view>
+</view>

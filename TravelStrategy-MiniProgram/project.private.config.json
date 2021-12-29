@@ -1,4 +1,5 @@
 {
+    "setting": {},
     "condition": {
         "plugin": {
             "list": []
@@ -14,6 +15,12 @@
                 {
                     "name": "",
                     "pathName": "pages/destination/destination",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/attractions/attractions",
                     "query": "",
                     "scene": null
                 }
