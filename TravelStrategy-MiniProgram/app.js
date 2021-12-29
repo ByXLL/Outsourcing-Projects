@@ -1,4 +1,16 @@
 //app.js
+/**
+ * 重写promise原型链
+ */
+function rewritePromise() {
+  if(!Promise.prototype.finally){
+    Promise.prototype.finally = function(callback){
+      let P = this.constructor;
+      return this.then(value => { P.resolve(callback()).then(() => value) }, reason => { P.resolve(callback()).then(() => { throw reason }) })
+    }
+  }
+}
+rewritePromise()
 App({
   onLaunch: function () {
     // 展示本地存储能力

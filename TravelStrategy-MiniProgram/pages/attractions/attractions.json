@@ -1,4 +1,5 @@
 {
   "navigationBarTitleText": "景点",
+  "enablePullDownRefresh": false,
   "usingComponents": {}
 }

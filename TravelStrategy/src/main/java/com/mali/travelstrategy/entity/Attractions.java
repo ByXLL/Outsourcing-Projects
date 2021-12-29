@@ -35,6 +35,9 @@ public class Attractions implements Serializable {
     @ApiModelProperty(value = "景点名称")
     private String name;
 
+    @ApiModelProperty(value = "景点标题")
+    private String title;
+
     @ApiModelProperty(value = "封面图")
     private String coverPic;
 

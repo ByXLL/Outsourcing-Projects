@@ -1,26 +1,58 @@
 <!-- 搜索框 -->
-<van-search
-  value="{{ inputValue }}"
-  placeholder="搜索附近酒店/景点/美食"
-  use-action-slot
-  bind:change="onSearchChange"
-  bind:search="onSearch">
-  <view slot="action" bind:tap="onSearchClick">搜索</view>
-</van-search>
-<van-dropdown-menu>
-  <van-dropdown-item value="{{ optionValue1 }}" options="{{ option1 }}" data-index="0" bind:change="changeSelect"/>
-  <van-dropdown-item value="{{ optionValue2 }}" options="{{ option2 }}" data-index="1" bind:change="changeSelect"/>
-  <van-dropdown-item value="{{ optionValue2 }}" options="{{ option2 }}" data-index="1" bind:change="changeSelect"/>
-</van-dropdown-menu>
-<view class="list">
-    <view class="d-clo margin-center attractions-item" wx:for="{{10}}" wx:key="index">
-        <view class="d-row d-jc-between">
-            <view><image class="left-img" src="{{item.imageUrlBig}}"></image></view>
-            <view class="right-text">
-                <text class="right-text1">涠洲岛</text>
-                <text class="right-text2 text-two-line">位置：广西北海市涠洲岛</text>
-                <text class="right-text3 text-two-line">【】涠洲岛详细介绍拿出你穿的那件彻底否定反复若非...</text>
+<view class="page-body">
+  <view class="search-warp">
+    <van-search
+      custom-class="search-warp"
+      value="{{ attractionsName }}"
+      placeholder="搜索附近景点"
+      use-action-slot
+      bind:change="onSearchChange"
+      bind:search="onSearchClick">
+      <view slot="action" bind:tap="onSearchClick">搜索</view>
+    </van-search>
+  </view>
+  <!-- 筛选框 -->
+  <view class="dropdown-warp" >
+    <van-dropdown-menu custom-class="dropdown-menu" active-color="#1989fa">
+      <van-dropdown-item title="所在城市">
+        <van-cell title="{{ switchTitle1 }}">
+          <view class="city-search-form">
+            <view class="search">
+              <i class="iconfont icon-search2" style="font-size:26rpx;padding:10rpx;"></i>
+              <input class="city-input" placeholder="请输入城市名称" bindblur="onCityInputBlur"></input>
+            </view>
+            <view class="btn-warp">
+              <van-button icon="search" round type="info" size="small" bindtap="submitCity">确定</van-button>                 
+            </view>
+          </view>
+        </van-cell>
+      </van-dropdown-item>
+      <van-dropdown-item title="景点票价" value="{{ optionValue1 }}" options="{{ option1 }}" data-index="1" bind:change="changeSelect"></van-dropdown-item>
+      <van-dropdown-item title="景点星级" value="{{ optionValue2 }}" options="{{ option2 }}" data-index="2" bind:change="changeSelect"/>
+    </van-dropdown-menu>
+  </view>
+  <!-- 列表循环 -->
+  <view class="list">
+    <scroll-view 
+      style="height: 100%"
+      scroll-y="true"
+      refresher-triggered="{{isRefresh}}"
+      scroll-anchoring="true"
+      enhanced="true"
+      refresher-enabled
+      bindrefresherrefresh="refresh"
+      bindscrolltolower="loadMore"
+      fast-deceleration="true">
+        <view class="d-clo margin-center attractions-item" wx:for="{{attractionsList}}" wx:key="id" bindtap="navToDatailPage" data-id="{{item.id}}">
+            <view class="d-row d-jc-between">
+                <view><image class="left-img" src="{{item.coverPic}}"></image></view>
+                <view class="right-text">
+                    <text class="right-text1">{{item.name}}</text>
+                    <text class="right-text2 text-two-line">位置：{{item.city}}</text>
+                    <text class="right-text3 text-two-line">{{item.title}}</text>
+                </view>
             </view>
         </view>
-    </view>
+    </scroll-view>
+  </view>
 </view>

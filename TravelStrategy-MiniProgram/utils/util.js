@@ -166,18 +166,7 @@ function deleteStorageByKey(key) {
 function clearStorage() {
   wx.clearStorage()
 }
-/**
- * 设置购物车数量
- */
-function setCartNum(num) {
-  setStorage('userCartNum',num+'')
-  if(num) {
-    wx.setTabBarBadge({
-      index: 2,
-      text: num + ''
-    });    
-  }else { wx.removeTabBarBadge({index: 2})}
-}
+
 
 module.exports = {
   formatTime,
@@ -196,6 +185,5 @@ module.exports = {
   getStorageByKey,
   deleteStorageByKey,
   clearStorage,
-  isIn30minutes,
-  setCartNum
+  isIn30minutes
 }

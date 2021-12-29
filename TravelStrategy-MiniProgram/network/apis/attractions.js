@@ -1,9 +1,10 @@
 import request from '../request.js'
 
 // 获取景点列表
-export function getAttractionsList(data) {
+export function getAttractionsList(page,pageSize,data) {
   return request({
-    url: `/attractions/findPagerByParam`,
+    method: 'post',
+    url: `/attractions/findPagerByParam?page=${page}&pageSize=${pageSize}`,
     data
   })
 }

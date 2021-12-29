@@ -8,23 +8,42 @@
 page{
     background-color: #F6F6F6;
 }
-
+.search-warp, .dropdown-menu{
+    height: 80rpx !important;
+}
+.page-body{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    background: #F6F6F8;
+  }
 .search{
+    flex: 1;
     display: flex;
     flex-direction: row;
     align-items: center;
     margin:0 auto;
-    width: 550rpx;
-    height: 56rpx;
+    height: 60rpx;
     border-radius: 20rpx;
     color: #666666;
     background-color: #eeeeee;
     font-size: 28rpx;
 }
+.city-search-form{
+    display: flex;
+    height: 80rpx;
+    align-items: center;
+}
+.city-search-form .btn-warp{
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+}
+
 
 .list{
-    padding-top:30rpx;
-    padding-bottom:20rpx
+    height: calc(100% - 190rpx);
+    margin-top: 30rpx;
 }
 .list .attractions-item{
     width: 686rpx;
@@ -97,6 +116,7 @@ page{
     align-content: center;
     padding: 20rpx;
     text-align: left;
+    flex: 1;
 }
 .right-text1{
     display: block;
@@ -114,4 +134,7 @@ page{
     display:block ;
     width: 100%;
     font-size: 12px;
+}
+.city-input{
+    text-align: left;
 }
