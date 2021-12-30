@@ -1,4 +1,4 @@
-import {getAttractionsList,getAttractionById} from "../../network/apis/attractions.js"
+import {getAttractionsList} from "../../network/apis/attractions.js"
 Page({
 
     /**
@@ -158,9 +158,9 @@ Page({
     navToDatailPage({currentTarget}) {
         let id = currentTarget.dataset.id
         console.log(id)
-        // wx.navigateTo({
-        //     url: `/pages/goodsDetails/goodsDetails?id=${detail.id}`
-        //   })
+        wx.navigateTo({
+            url: `/pages/attractionsDetail/attractionsDetail?id=${id}`
+          })
     }
 
 })

@@ -23,6 +23,12 @@
                     "pathName": "pages/attractions/attractions",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/attractionsDetail/attractionsDetail",
+                    "query": "id=1",
+                    "scene": null
                 }
             ]
         }

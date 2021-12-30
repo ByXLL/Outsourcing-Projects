@@ -5,7 +5,8 @@
         "pages/destination/destination",
         "pages/index/index",
         "pages/me/me",
-        "pages/attractions/attractions"
+        "pages/attractions/attractions",
+        "pages/attractionsDetail/attractionsDetail"
     ],
     "permission": {
         "scope.userLocation": {
@@ -13,7 +14,7 @@
         }
     },
     "window": {
-        "enablePullDownRefresh": true,
+        "enablePullDownRefresh": false,
         "backgroundTextStyle": "dark",
         "navigationBarBackgroundColor": "#fff",
         "navigationBarTitleText": "旅游攻略",
@@ -55,7 +56,10 @@
         "van-dropdown-item": "@vant/weapp/dropdown-item/index",
         "van-cell": "@vant/weapp/cell/index",
         "van-cell-group": "@vant/weapp/cell-group/index",
-        "van-button": "@vant/weapp/button/index"
+        "van-button": "@vant/weapp/button/index",
+        "van-divider": "@vant/weapp/divider/index",
+        "van-rate": "@vant/weapp/rate/index",
+        "van-panel": "@vant/weapp/panel/index"
     },
     "sitemapLocation": "sitemap.json"
 }
