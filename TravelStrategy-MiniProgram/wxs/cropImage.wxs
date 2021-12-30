@@ -1,0 +1,11 @@
+var CropImage = (function(url, width, height, quality, ifOriginal) {
+    quality = undefined === quality ? 90 : quality;
+    ifOriginal = undefined === ifOriginal ? false : ifOriginal;
+    if (!url) return;;
+    url = url.split('?')[(0)];
+    var size = width + 'x' + height;
+    var query = 'imageMogr2/auto-orient/thumbnail/!' + size + 'r/gravity/Center/crop/!' + size + '/quality/' + quality;
+    var reg = getRegExp("/\x5c?.*/", "g");
+    return (ifOriginal ? url.replace(reg, '') : url.replace(reg, '') + '?' + encodeURIComponent(query))
+});
+module.exports = CropImage;

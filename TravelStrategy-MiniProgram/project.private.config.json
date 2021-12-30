@@ -29,6 +29,18 @@
                     "pathName": "pages/attractionsDetail/attractionsDetail",
                     "query": "id=1",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/userInfo/userInfo",
+                    "query": "userId=2",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/login/login",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

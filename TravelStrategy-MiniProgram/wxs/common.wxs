@@ -1,0 +1,31 @@
+/**
+ * 相关函数
+ */
+var filters = {
+  //字符串截取
+  subStrCut: function(str, len) {
+    if(str){
+      console.log(str)
+      return str.substring(0, len);      
+    }
+  },
+  // 时间戳转年月日
+  formatTime: function(data) {
+    if(data) {
+      var date = getDate(data)
+      var year = date.getFullYear()
+      var month = date.getMonth() + 1
+      var day = date.getDate()
+      var hour = date.getHours()<10?'0'+date.getHours():date.getHours();
+      var minute = date.getMinutes()<10?'0'+date.getMinutes():date.getMinutes();
+      var second = date.getSeconds()<10?'0'+date.getSeconds():date.getSeconds();
+      return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second
+    }
+  },
+}
+
+
+module.exports = {
+  subStrCut: filters.subStrCut,
+  formatTime: filters.formatTime
+}

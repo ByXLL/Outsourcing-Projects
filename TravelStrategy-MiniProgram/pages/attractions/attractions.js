@@ -160,7 +160,7 @@ Page({
         console.log(id)
         wx.navigateTo({
             url: `/pages/attractionsDetail/attractionsDetail?id=${id}`
-          })
+        })
     }
 
 })

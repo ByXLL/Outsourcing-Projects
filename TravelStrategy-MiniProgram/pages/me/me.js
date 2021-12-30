@@ -68,62 +68,14 @@ Page({
     onShareAppMessage: function () {
 
     },
-    /**
-     * 个人主页
-     */
-    homeClick: function(){
-        wx.showModal({
-            title: '提示',
-            content: '提示内容？',
-            success(res) {
-                if (res.confirm) {
-                    console.log('用户点击确定')
-                } else if (res.cancel) {
-                    console.log('用户点击取消')
-                }
-            }
+    // 个人主页
+    homeClick(){
+        let userId = 2
+        wx.navigateTo({
+            url: `/pages/userInfo/userInfo?userId=${userId}`
         })
     },
-    /**
-     * 打卡事件
-     */
-    clockInClick: function(){
-        if(this.data.clockInTitle == '打卡'){
-            this.setData({
-                clockInTitle: "已打卡"
-            })
-            this.showToastSuccess('打卡成功');
-        }else{
-            this.showToastSuccess('已经打过了');
-        }
-    },
-
-    /**
-     * 完善资料事件
-     */
-    infoClick: function(){
-        console.log("this.overInfo--"+this.overInfo)
-        console.log("this.clockInTitle--"+this.clockInTitle)
-        if(this.data.overInfo >= this.data.allInfo){
-            this.showToastSuccess('资料全部完成啦');
-        }else{
-            // this.overInfo = this.data.overInfo + 1
-            this.data.overInfo += 1
-            this.setData({
-                overInfo: this.data.overInfo
-            })
-            if(this.data.overInfo == this.data.allInfo){
-                this.showToastSuccess('资料全部完成啦');
-            }
-        }
-    },
-    showToastSuccess: function(title){
-        wx.showToast({
-            title: title,
-            icon: 'success',
-            duration: 2000
-        })
-    },
+    
     /**
      * 旅行照片浏览
      */

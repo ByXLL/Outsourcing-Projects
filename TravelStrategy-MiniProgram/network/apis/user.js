@@ -27,7 +27,7 @@ export function updateUser(data) {
   })
 }
 
-// 用户编辑
+// 获取用户信息
 export function getUserInfoByUserId(userId) {
   return request({
     url: `/user/findById?id=${userId}`,

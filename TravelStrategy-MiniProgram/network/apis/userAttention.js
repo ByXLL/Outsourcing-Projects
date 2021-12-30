@@ -10,7 +10,7 @@ export function addUserAttention(data) {
 }
 
 // 删除用户关注
-export function delRaiders(id) {
+export function delAttention(id) {
   return request({
     method: 'post',
     url: `/user-attention/del?id=${id}`,
@@ -18,9 +18,9 @@ export function delRaiders(id) {
 }
 
 // 获取用户关注
-export function getByUserId(uerId) {
+export function getAttentionByUserId(userId) {
   return request({
-    url: `/user-attention/findByUserId?uerId=${uerId}`,
+    url: `/user-attention/findByUserId?uerId=${userId}`,
   })
 }
 

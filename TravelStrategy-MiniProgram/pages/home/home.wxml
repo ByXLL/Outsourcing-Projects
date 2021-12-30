@@ -6,19 +6,25 @@
 </view>
 <!-- banner -->
 <view class="width100">
-    <image style="width:100%;height:420rpx;" src="/static/sea.jpg"></image>
+    <swiper class="swiper-warp" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{3000}}">
+        <block wx:for="{{swiperImgs}}" wx:key="*this">
+          <swiper-item>
+            <image class="swiper-img" mode="scaleToFill" src="{{item}}"></image>
+          </swiper-item>
+        </block>
+      </swiper>
+    <!-- <image style="width:100%;" src="/static/sea.jpg"></image> -->
 </view>
 
 <!-- 导航 -->
 <view class="d-row d-jc-around d-ai-centen margin-center nav font24">
     <view class="text-center" 
-    bindtap="navClick"
-    data-index="{{item.index}}"
-    data-title="{{item.title}}"
-    wx:for="{{navArray}}" 
-    wx:key="title"> 
-
-        <image class="nav-img animation-nav" src="/static/shoucang.png"></image> 
+        bindtap="navClick"
+        data-index="{{item.index}}"
+        data-title="{{item.title}}"
+        wx:for="{{navArray}}" 
+        wx:key="title"> 
+        <image class="nav-img" src="/static/shoucang.png"></image> 
         <text>\n{{item.title}}</text> 
     </view>
 </view>
@@ -63,7 +69,7 @@
 <!-- 小视频 -->
 <view class="play">
     <view class="width90 d-row d-jc-between d-ai-centen margin-center padding-20">
-        <view class="font34">小视频</view>
+        <view class="font34">热门攻略</view>
         <view class="font26 gray2">点击前往<i class="iconfont icon-youjiantou1" style="position: relative;top: 4rpx;"></i></view>
     </view>
 

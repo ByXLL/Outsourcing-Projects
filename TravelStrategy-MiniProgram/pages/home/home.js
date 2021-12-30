@@ -27,6 +27,11 @@ Page({
         index:4,
         title:'游记'
       },
+    ],
+    swiperImgs: [
+      '/static/swiper/banner1.jpg',
+      '/static/swiper/banner2.jpg',
+      '/static/swiper/banner3.jpg'
     ]
   },
 

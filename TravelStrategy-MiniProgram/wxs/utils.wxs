@@ -1,0 +1,22 @@
+var numRound = (function(num) {
+    if (num > 9999) {
+        num = (num / 10000).toFixed(1) + 'w'
+    };
+    return (num)
+});
+var formateNumber = (function(num) {
+    if (num >= 10000) {
+        num = Math.round(num / 10000 * 10) / 10 + 'W'
+    } else if (num >= 1000) {
+        num = Math.round(num / 1000 * 10) / 10 + 'K'
+    };
+    return (num)
+});
+var parsePrice = (function(num) {
+    return (parseInt(num, 10))
+});
+module.exports = ({
+    numRound: numRound,
+    formateNumber: formateNumber,
+    parsePrice: parsePrice,
+});

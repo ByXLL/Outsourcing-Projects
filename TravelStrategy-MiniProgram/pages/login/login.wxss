@@ -1,0 +1,29 @@
+.form-warp{
+    width: 100%;
+    height: 100%;
+    padding-top: 150rpx;
+}
+.form-title{
+    width: 100%;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    display: block;
+    font-size: 36rpx;
+    font-weight: bold;
+}
+.input-group{
+    margin: 100rpx 100rpx 0;
+}
+.label{
+    font-size: 36rpx;
+}
+.input{
+    font-size: 32rpx;
+}
+vant-cell {
+    height: 100rpx !important;
+}
+.btn-warp{
+    margin: 100rpx 100rpx 0;
+}

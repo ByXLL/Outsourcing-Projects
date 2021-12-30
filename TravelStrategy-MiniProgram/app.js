@@ -51,13 +51,6 @@ App({
     wx.showTabBarRedDot({
       index:2
     })
-
-    // 为 tabBar 某一项的右上角添加文本
-    wx.setTabBarBadge({
-      index:3,
-      text:'666'
-    })
-
   },
   globalData: {
     userInfo: null

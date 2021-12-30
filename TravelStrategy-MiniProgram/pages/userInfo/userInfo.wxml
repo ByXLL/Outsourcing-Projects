@@ -1,0 +1,67 @@
+<wxs module="common" src="/wxs/common.wxs"></wxs>
+<view class="user-head__box">
+    <view class="user-head">
+        <image class="user-head__avatar" lazyLoad="{{true}}" mode="aspectFill" src="{{userInfo.avatar}}"></image>
+        <image class="user-head_gender" lazyLoad="{{true}}" mode="aspectFill" src="{{userInfo.sex == 1? 'https://images.mafengwo.net/wxapp/images/mine/icon_sex_male.png?id=1':'https://images.mafengwo.net/wxapp/images/mine/icon_sex_female.png?id=1'}}"></image>
+    </view>
+    <view class="user-name__footprint">
+        <view class="d-flex">
+            <view class="user-name">{{userInfo.nickName}}</view>
+            <view class="opreate">
+                <!-- <view bindtap="followUser" class="opreate-edit opreate-edit__finish">
+                    <view class="opreate-edit__icon opreate-follow__icon-finish"></view>
+                    已关注
+                </view> -->
+                <view bindtap="followUser" class="opreate-edit opreate-edit__wait">
+                    <view class="opreate-edit__icon opreate-follow__icon-wait"></view>
+                    关注
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="user-font">
+        <text>{{userInfo.age}}</text> 岁
+        <text class="user-vertical">|</text>
+        <text>{{userInfo.city}}</text>
+    </view>
+    <view class="d-flex user-tag light">
+        <view class="user-tag__bg">
+            <text class="font-bold">10000</text> 关注
+        </view>
+        <view class="user-tag__bg">
+            <text class="font-bold">10000</text> 粉丝
+        </view>
+        <view class="user-tag__bg">
+            <text class="font-bold">10000</text> 获赞
+        </view>
+    </view>
+    <view class="user-des multiline-ellipsis">{{userInfo.introduction?userInfo.introduction:'世界那么大，我想出去看看'}}</view>
+    <view class="user-join">
+        <text>    </text>
+    </view>
+</view>
+
+<view class="content-nav">
+    <!-- <view class="type">
+        <view bindtap="selectType" data-type="2">游记<text class="active"></text></view>
+        <view bindtap="selectType" data-type="4">笔记<text></text></view>
+        <view bindtap="selectType" data-type="3">提问<text></text></view>
+        <view bindtap="selectType" data-type="5">回答<text></text></view>
+    </view> -->
+</view>
+<scroll-view slot bindscrolltolower="bindLoadmore" class="page-scroll iphoneX" enableBackToTop="true" lowerThreshold="200" scrollWithAnimation="true" scrollY="true">
+    <view>
+        <view class="list">
+            <view bindtap="toRaidersDetail" class="item" wx:for="{{raidersList}}" wx:key="id" data-id="{{item.id}}">
+                <image class="pic" lazyLoad="{{true}}" mode="aspectFill" src="{{item.coverPic}}"></image>
+                <view class="content pic_width">
+                    <view class="title">{{item.title}}</view>
+                    <view class="">
+                        <view class="time">发布于 {{common.formatTime(item.createTime)}}</view>
+                        <view class="like"> <text class="f-blod">999</text> 点赞</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</scroll-view>
