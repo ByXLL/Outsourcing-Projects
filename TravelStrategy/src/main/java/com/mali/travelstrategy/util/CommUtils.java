@@ -81,7 +81,7 @@ public class CommUtils {
      * @return          token
      */
     public static String getToken(User user) {
-        int time = 60 * 60 * 1000;
+        int time = 24 * 60 * 60 * 1000;  // 一天
         Long now = System.currentTimeMillis();
         Long expMils = now + time;
         String token="";

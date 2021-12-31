@@ -3,67 +3,12 @@ import {
   header,
   timeout
 } from './config.js'
-import {login} from "./apis/user.js"
 import { setStorage, Toast, debounce} from '../utils/util.js'
 const app = getApp()
 
-function whiteList(url) {
-  if(
-    url != '/applet/goods/goodsShop/1' && 
-    url != '/applet/appletUser/login' && 
-    url != '/applet/goods/banner'
-  ){ return true }
-  return false
-}
-
-// 401 token过期 重新登录
-let getUserInfo =  debounce(function() {
-    console.error('---------------重新触发登录------------')
-    wx.login({
-      success: res => {
-        console.log('登录微信成功',res)
-        if (res.code) {
-          wx.setStorageSync('code', res.code)
-          let userDetailInfo = wx.getStorageSync('userDetailInfo')
-          let data = {
-            appid:app.globalData.appId,
-            code: res.code, 
-            encryptedData: userDetailInfo.encryptedData,
-            iv: userDetailInfo.iv,
-            signAture: userDetailInfo.signature,
-            userInfo: userDetailInfo.userInfo
-          }
-          wx.showToast({
-            title: '正在登录中...',
-            icon: 'loading'
-          })
-          login(data).then( res=> {
-            setStorage('token', res.data.token.authorization)
-            setStorage('appletUser', res.data.appletUser)              
-            setStorage('isHasUserDetailInfo',true)
-            setStorage('isLogin', true)
-            console.log(res)
-            wx.hideToast()
-          }).catch(err => {
-            setStorage('isLogin', false)
-            console.error(err)
-            Toast('登录失败，请重试!')
-          })
-          // .finally(() => {
-          //   wx.hideToast()
-          // })
-  
-        } else { console.error('登录失败！' + res.errMsg)}
-      },
-      fail: err => { console.error('登录失败---',err) }
-    })
-},1000)
-
 export default function(options) {
   let header = {}
-  if(whiteList(options.url)) {
-    header = {'authorization': wx.getStorageSync('token') || '' }
-  }
+  header.token = wx.getStorageSync('token') || '' 
   console.log('请求携带的参数----',options.data)
   return new Promise(function(resole, reject) {
     wx.request({
@@ -75,8 +20,11 @@ export default function(options) {
       success(res){
         if(res.statusCode != 200 || res.data.code != 200) {
           if(res.data.code == 401) { 
-            console.error('登录过期') 
-            getUserInfo()
+            console.error('登录过期')
+            setStorage("isLogin",false)
+            setStorage("token", '')
+            setStorage("userInfo", '')
+            wx.reLaunch({url: `/pages/login/login`})
           }
           return reject(res.data)
         }

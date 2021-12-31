@@ -42,6 +42,9 @@ Page({
         login(data).then(({data}) => {
             console.log(data)
             Toast.success('登录成功');
+            setStorage('token',data.token)
+            setStorage('isLogin', true)
+            setStorage('userInfo', data.userInfo)
         }).catch(err => {
             Toast.fail(err.msg);
         }).finally(() => {
