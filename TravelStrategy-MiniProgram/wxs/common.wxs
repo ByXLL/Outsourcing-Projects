@@ -22,10 +22,21 @@ var filters = {
       return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second
     }
   },
+    // 时间戳转年月日时分秒
+    formatTime2: function(data) {
+      if(data) {
+        var date = getDate(data)
+        var year = date.getFullYear()
+        var month = date.getMonth() + 1
+        var day = date.getDate()
+        return year + '-' + month + '-' + day 
+      }
+    },
 }
 
 
 module.exports = {
   subStrCut: filters.subStrCut,
-  formatTime: filters.formatTime
+  formatTime: filters.formatTime,
+  formatTime2: filters.formatTime2
 }

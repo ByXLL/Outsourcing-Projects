@@ -1,39 +1,60 @@
+<wxs module="common" src="/wxs/common.wxs"></wxs>
 <view class="page-body">
     <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="{{3000}}">
         <block wx:for="{{swiperImgs}}" wx:key="*this">
           <swiper-item>
-            <image mode="aspectFit" src="{{item}}"></image>
+            <image class="swiper-img" mode="aspectFill" src="{{item}}"></image>
           </swiper-item>
         </block>
       </swiper>
       <view class="content-wrap">
         <view class="base-info l-r-padding">
-            <text class="attractions-name">{{detailInfo.name}}</text>
-            <!-- <van-divider custom-style="hairline" hairline /> -->
-            <van-cell-group>
-                <van-cell icon="location-o" center>
-                    <view slot="title">
-                        <view class="cell-lable">定位：{{detailInfo.city}}</view>
+            <view class="user-name__footprint">
+                <image class="user-head__avatar" lazyLoad="{{true}}" mode="aspectFill" src="{{avatar}}"></image>
+                <view class="other-info-warp">
+                    <view class="user-name">{{detailInfo.author}}</view>   
+                    <view class="createTime">{{common.formatTime2(detailInfo.createTime)}}</view>            
+                </view>
+                <view class="opreate">
+                    <!-- <view bindtap="followUser" class="opreate-edit opreate-edit__finish">
+                        <view class="opreate-edit__icon opreate-follow__icon-finish"></view>
+                        已关注
+                    </view> -->
+                    <view bindtap="followUser" class="opreate-edit opreate-edit__wait">
+                        <view class="opreate-edit__icon opreate-follow__icon-wait"></view>关注
                     </view>
-                </van-cell>
-                <van-cell icon="star-o" center>
-                    <view slot="title">
-                        <view class="cell-lable">星级：<van-rate value="{{ detailInfo.starRating }}" color="#ffd21e"/></view>
-                    </view>
-                </van-cell>
-                <van-cell icon="gold-coin-o" center>
-                    <view slot="title">
-                        <view class="cell-lable">票价：￥{{detailInfo.fare}} 元</view>
-                    </view>
-                </van-cell>
-            </van-cell-group>
+                </view>
+            </view>
         </view>
         <view class="detail-title-wrap">
-            <text class="cell-lable">简介</text>
+            <!-- <text class="cell-lable">简介</text> -->
             <text class="detail-title">{{detailInfo.title}}</text>
         </view>
         <view class="detail-info l-r-padding">
-            <rich-text nodes="{{detailInfo.content}}"></rich-text>  
+            <rich-text nodes="{{detailInfo.content}}"></rich-text>
+        </view>
+        <view class="comment-list">
+            <view class="comment-form">
+                <image class="img" src="/static/shoucang.png"></image>
+                <input class="input" placeholder="成为第一个回复的人吧" />
+                <van-button bind:click="toComment"  round type="info" size="small" color="linear-gradient(90deg, #65d3e8,#7dc3f2)">评论</van-button>
+            </view>
+            <van-divider />
+
+
+            <block wx:for="{{5}}" wx:key="index">
+                <view class="comment-wrap">
+                    <image class="user-avatar" src="/static/head.png"></image>
+                    <view class="other-info-warp">
+                        <view>
+                            <text class="user-name">{{detailInfo.author}}</text>
+                            <text class="createTime">{{common.formatTime2(detailInfo.createTime)}}</text>
+                        </view>
+                        <view class="comments">{{detailInfo.title}}</view>
+                    </view>
+                </view>
+                <van-divider />
+            </block>
         </view>
       </view>
 </view>

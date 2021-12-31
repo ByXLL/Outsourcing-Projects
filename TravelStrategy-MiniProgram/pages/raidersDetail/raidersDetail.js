@@ -1,5 +1,5 @@
 // pages/attractionsDetail/attractionsDetail.js
-import {getAttractionById} from "../../network/apis/attractions.js"
+import {getRaidersById,getRaidersByIdAndStat} from "../../network/apis/raiders.js"
 Page({
 
     /**
@@ -7,6 +7,8 @@ Page({
      */
     data: {
         id: '',
+        authorId: '',
+        avatar: '',
         detailInfo: {},
         swiperImgs: [],
     },
@@ -15,9 +17,13 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.setData({id:options.id})
         console.log(options)
-        this._getAttractionById()
+        this.setData({
+            id: options.id,
+            authorId: options.authorid,
+            avatar: options.avatar
+        })
+        this._getRaidersById()
     },
 
     /**
@@ -34,8 +40,8 @@ Page({
 
     },
     // 获取景点详情信息
-    _getAttractionById() {
-        getAttractionById(this.data.id).then(({data}) => {
+    _getRaidersById() {
+        getRaidersById(this.data.id).then(({data}) => {
             console.log(data)
             this.setData({
                 detailInfo: data,
@@ -44,5 +50,11 @@ Page({
         }).catch(err => {
             console.log(err)
         })
+    },
+
+
+    // 去评论
+    toComment() {
+        console.log('评论')
     }
 })

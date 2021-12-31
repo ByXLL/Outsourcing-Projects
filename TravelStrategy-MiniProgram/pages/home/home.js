@@ -125,14 +125,16 @@ Page({
   },
   // 跳转至详情页
   toRaidersDetail(e) {
-    let id =e.currentTarget.dataset.authorId 
+    let id = e.currentTarget.dataset.id
+    let authorid = e.currentTarget.dataset.authorid
+    let avatar = e.currentTarget.dataset.avatar
     wx.navigateTo({
-      url: `/pages/raidersDetail/raidersDetail?id=${id}`
+      url: `/pages/raidersDetail/raidersDetail?id=${id}&authorid=${authorid}&avatar=${avatar}`
     })
   },
   // 跳转用户页
   toUserInfo(e) {
-    let id =e.currentTarget.dataset.authorid 
+    let id =e.currentTarget.dataset.authorid
     wx.navigateTo({
       url: `/pages/userInfo/userInfo?userId=${id}`
     })

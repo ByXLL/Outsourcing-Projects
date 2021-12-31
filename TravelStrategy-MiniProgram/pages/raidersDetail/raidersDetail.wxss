@@ -6,12 +6,76 @@
 .page-body{
   width: 100%;
   height: 100%;
-  overflow: hidden;
   /* background: #F6F6F8; */
   background: #eeeeee;
 }
-.content-wrap{
+.swiper-img{
+  width: 100%;
+  height: 100%;
+}
 
+.user-name__footprint {
+  display: flex;
+  align-items: center;
+}
+.user-head__avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: none;
+}
+
+.opreate {
+  margin-left: 20rpx;
+}
+.opreate-edit {
+  width: 126rpx;
+  height: 40rpx;
+  box-sizing: border-box;
+  border-radius: 43rpx;
+  text-align: center;
+  padding: 8rpx 0;
+  line-height: 43rpx;
+  font-size: 22rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.opreate-edit__wait {
+  background: #ffdb26;
+  color: #474747;
+}
+
+.opreate-edit__finish {
+  background: hsla(0,0%,100%,.4);
+  color: #474747;
+}
+
+.opreate-edit__icon {
+  width: 18rpx;
+  height: 18rpx;
+  margin-right: 8rpx;
+}
+.opreate-follow__icon-wait {
+  background: url("https://images.mafengwo.net/wxapp/images/mine/icon_add.png") no-repeat;
+  background-size: 100%,100%;
+}
+
+.opreate-follow__icon-finish {
+  background: url("https://images.mafengwo.net/wxapp/images/mine/img_follow.png") no-repeat;
+  background-size: 100%,100%;
+}
+.other-info-warp{
+  font-size: 26rpx;
+  margin-left: 20rpx;
+}
+.createTime{
+  margin-top: 10rpx;
+}
+
+.content-wrap{
+  background: #eeeeee;
 }
 
 .content-wrap .base-info{
@@ -43,7 +107,6 @@
   display: block;
 }
 .detail-title{
-  margin-top: 20rpx;
   font-size: 28rpx;
   color: #969799;
 }
@@ -51,4 +114,45 @@
   margin-top: 30rpx;
   background-color: #ffffff;
   padding: 30rpx;
+}
+
+.comment-list{
+  margin-top: 30rpx;
+  background-color: #ffffff;
+  padding: 30rpx;
+  border-radius: 32rpx 32rpx 0 0;
+}
+.comment-form{
+  display: flex;
+  align-items: center;
+}
+.comment-form .img{
+  width: 60rpx;
+  height: 60rpx;
+}
+.comment-form .input{
+  flex: 1;
+  height: 70rpx;
+  background-color: #eeeeee;
+  border-radius: 30rpx;
+  padding-left: 30rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
+.comment-wrap{
+  margin-top: 20rpx;
+  display: flex;
+}
+.comment-wrap .user-avatar{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+.comment-wrap .createTime{
+   font-size: 24rpx;
+   color: #969799;
+   margin-left: 30rpx;
+}
+.comment-wrap .comments{
+  margin-top: 20rpx;
 }

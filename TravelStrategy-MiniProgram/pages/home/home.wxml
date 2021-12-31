@@ -62,7 +62,7 @@
     <view class="video-list width90 d-row d-jc-between margin-center padding-bottom-50">
         <block wx:for="{{raidersList}}" wx:key="id">
             <view class="video-item"> 
-                <image class="video" data-id="{{item.id}}" bindtap="toRaidersDetail" src="{{item.coverPic}}"></image> 
+                <image class="video" data-avatar="{{item.avatar}}" data-authorId="{{item.authorId}}" data-id="{{item.id}}" bindtap="toRaidersDetail" src="{{item.coverPic}}"></image> 
                 <view class="video-info">
                     <view class="video-title">{{item.title}}</view>
                     <view class="other-info">
