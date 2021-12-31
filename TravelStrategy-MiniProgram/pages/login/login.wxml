@@ -23,6 +23,7 @@
                 placeholder="请输入密码"
                 required/>
         </van-cell-group>
+        <text class="register" bindtap="toRegister">立即注册</text>
     </view>
     <view class="btn-warp">
         <van-button round type="primary" bind:click="toLogin" size="large" color="linear-gradient(90deg, #65d3e8,#7dc3f2)">登录</van-button>

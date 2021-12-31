@@ -1,0 +1,51 @@
+<view class="form-warp">
+    <text class="form-title">账号注册</text>
+    <view class="input-group">
+        <van-cell-group>
+            <van-field
+                label-class="label"
+                input-class="input"
+                model:value="{{ username }}"
+                required
+                clearable
+                size="large"
+                label="用户名"
+                placeholder="请输入用户名"/>
+            <van-field
+                label-class="label"
+                input-class="input"
+                model:value="{{ nickName }}"
+                required
+                clearable
+                size="large"
+                label="昵称"
+                placeholder="请输入昵称"/>
+
+            <van-field
+                label-class="label"
+                input-class="input"
+                model:value="{{ password }}"
+                type="password"
+                label="密码"
+                size="large"
+                clearable
+                placeholder="请输入密码"
+                required/>
+            <van-field
+                label-class="label"
+                input-class="input"
+                model:value="{{ confirmPassword }}"
+                type="password"
+                label="确认密码"
+                size="large"
+                clearable
+                placeholder="请输入密码"
+                required/>
+        </van-cell-group>
+        <text class="register" bindtap="toLoginPage">前往登录</text>
+    </view>
+    <view class="btn-warp">
+        <van-button round type="primary" bind:click="toRegister" size="large" color="linear-gradient(90deg, #65d3e8,#7dc3f2)">提交</van-button>
+    </view>
+    <van-toast id="van-toast" />
+</view>

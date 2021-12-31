@@ -36,7 +36,7 @@ Page({
         let userName = this.data.username
         let password =this.data.password
         if(userName.trim() == '') { return Toast.fail('请输入用户名') }
-        if(password.trim() == '') { return Toast.fail('请输入用户名') }
+        if(password.trim() == '') { return Toast.fail('请输入密码') }
         Toast.loading('正在登录中...')
         let data = { userName,password}
         login(data).then(({data}) => {
@@ -46,6 +46,11 @@ Page({
             Toast.fail(err.msg);
         }).finally(() => {
             
+        })
+    },
+    toRegister() {
+        wx.navigateTo({
+            url: `/pages/register/register`
         })
     }
 })

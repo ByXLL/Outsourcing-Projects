@@ -10,7 +10,7 @@ export function login(data) {
 }
 
 // 用户注册
-export function regiest(data) {
+export function register(data) {
   return request({
     method: 'post',
     url: `/user/add`,
