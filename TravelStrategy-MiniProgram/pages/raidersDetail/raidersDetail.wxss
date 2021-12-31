@@ -1,0 +1,54 @@
+
+.l-r-padding{
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+.page-body{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* background: #F6F6F8; */
+  background: #eeeeee;
+}
+.content-wrap{
+
+}
+
+.content-wrap .base-info{
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+  border-radius: 32rpx 32rpx 0 0;
+  background-color: #ffffff;
+}
+.attractions-name{
+  margin-left: 10rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+.cell-lable{
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.hairline{
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+.detail-title-wrap{
+  background-color: #ffffff;
+  margin-top: 30rpx;
+  padding: 30rpx;
+  border-radius: 32rpx 32rpx 0 0;
+}
+.detail-title-wrap text{
+  display: block;
+}
+.detail-title{
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #969799;
+}
+.detail-info{
+  margin-top: 30rpx;
+  background-color: #ffffff;
+  padding: 30rpx;
+}

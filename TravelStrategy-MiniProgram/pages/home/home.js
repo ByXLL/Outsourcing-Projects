@@ -1,4 +1,5 @@
 // pages/home/home.js
+import {getRaidersByParamPager} from "../../network/apis/raiders.js"
 Page({
 
   /**
@@ -32,14 +33,18 @@ Page({
       '/static/swiper/banner1.jpg',
       '/static/swiper/banner2.jpg',
       '/static/swiper/banner3.jpg'
-    ]
+    ],
+    raidersList: [],
+    raidersTotal: 0,
+    pageIndex: 1,
+    isNoMore: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getRaidersList(true)
   },
 
   /**
@@ -81,14 +86,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    if(!this.data.isNoMore) {
+      
+    }
   },
   /**
    * 点击导航
@@ -99,5 +99,54 @@ Page({
     let title = event.currentTarget.dataset['title'];
     console.log("index",index)
     console.log("title",title)
+  },
+  // 获取攻略列表
+  getRaidersList(isRefresh) {
+    if(isRefresh) { this.setData({pageIndex:1}) }
+    let data = {}
+    getRaidersByParamPager(this.data.pageIndex,10,data).then(({data}) => {
+      console.log(data)
+      if(isRefresh) {
+        this.setData({
+          raidersList: data.records,
+          raidersTotal: data.total
+        })
+      }else {
+        let tempDataList = [...this.data.raidersList,...data.records]
+        let isSameLength = data.total == tempDataList.length ? true : false
+        this.setData({
+          raidersList: tempDataList,
+          isNoMore: isSameLength
+        })
+    }
+    }).catch(err => {
+      console.log(err)
+    })
+  },
+  // 跳转至详情页
+  toRaidersDetail(e) {
+    let id =e.currentTarget.dataset.authorId 
+    wx.navigateTo({
+      url: `/pages/raidersDetail/raidersDetail?id=${id}`
+    })
+  },
+  // 跳转用户页
+  toUserInfo(e) {
+    let id =e.currentTarget.dataset.authorid 
+    wx.navigateTo({
+      url: `/pages/userInfo/userInfo?userId=${id}`
+    })
+  },
+  // 跳转攻略列表页
+  toRaidersPage() {
+    wx.navigateTo({
+      url: `/pages/raiders/raiders`
+    })
+  },
+  // 跳转景点列表页
+  toAttractionsPage() {
+    wx.switchTab({
+      url: `/pages/attractions/attractions`
+    })
   }
 })

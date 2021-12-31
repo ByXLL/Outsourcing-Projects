@@ -57,10 +57,10 @@ export function  getRaidersByParam(data) {
 }
 
 // 分页条件查询攻略列表
-export function getRaidersByParamPager(data) {
+export function getRaidersByParamPager(pageIndex,pageSize,data) {
   return request({
     method: 'post',
-    url: `/raiders/searchByPager`,
+    url: `/raiders/searchByPager?page=${pageIndex}&pageSize=${pageSize}`,
     data
   })
 }

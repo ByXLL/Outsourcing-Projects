@@ -91,29 +91,13 @@ page{
 
 }
 .play-img{
-    width: 218rpx;
-    height: 218rpx;
-    border-radius: 10rpx;
+    width: 200rpx;
+    height: 200rpx;
+    border-radius: 20rpx;
 
-    animation: animation-play 3s;
-    -webkit-animation: animation-play 3s; /* Safari 与 Chrome */
 }
-
-@keyframes animation-play{
-    0%   {border-radius: 50%;}
-    25%  {border-radius: 30%;}
-    50%  {border-radius: 20%;}
-    70%  {border-radius: 10%;}
-    80%  {border-radius: 5%;}
-    100% {border-radius: 2%;}
-}
-@-webkit-keyframes animation-play{
-    0%   {border-radius: 50%;}
-    25%  {border-radius: 40%;}
-    50%  {border-radius: 30%;}
-    70%  {border-radius: 20%;}
-    80%  {border-radius: 5%;}
-    100% {border-radius: 2%;}
+.img-warp{
+    /* padding: 0 10px; */
 }
 
 .play-title{
@@ -171,6 +155,7 @@ page{
 .video-item .video-info .user-avatar {
     width: 50rpx;
     height: 50rpx;
+    border-radius: 50%;
 }
 .video-item .video-info .user-name {
     margin-left: 10rpx;

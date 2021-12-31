@@ -18,6 +18,7 @@ Page({
      */
     onLoad: function (options) {
         this.setData({userId:options.userId})
+        console.log(options.userId)
         this.getUserInfo()
         this.getRaiders()
     },

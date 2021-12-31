@@ -1,4 +1,6 @@
-import {getAttractionsList} from "../../network/apis/attractions.js"
+import {
+    getAttractionsList
+} from "../../network/apis/attractions.js"
 Page({
 
     /**
@@ -13,18 +15,43 @@ Page({
         attractionsName: "",
         tempCityName: '',
         cityName: '',
-        option1: [
-            { text: '免费', value: 0 },
-            { text: '收费', value: 1 },
+        option1: [{
+                text: '免费',
+                value: 0
+            },
+            {
+                text: '收费',
+                value: 1
+            },
         ],
-        option2: [
-            { text: '默认', value: -1 },
-            { text: '无', value: 0 },
-            { text: '一星', value: 1 },
-            { text: '二星', value: 2 },
-            { text: '三星', value: 3 },
-            { text: '四星', value: 4 },
-            { text: '五星', value: 5 }
+        option2: [{
+                text: '默认',
+                value: -1
+            },
+            {
+                text: '无',
+                value: 0
+            },
+            {
+                text: '一星',
+                value: 1
+            },
+            {
+                text: '二星',
+                value: 2
+            },
+            {
+                text: '三星',
+                value: 3
+            },
+            {
+                text: '四星',
+                value: 4
+            },
+            {
+                text: '五星',
+                value: 5
+            }
         ],
         optionValue1: null,
         optionValue2: -1,
@@ -47,7 +74,7 @@ Page({
     onReady: function () {
         // 隐藏 tabBar 某一项的右上角的红点
         wx.hideTabBarRedDot({
-            index:2
+            index: 2
         })
     },
 
@@ -64,18 +91,25 @@ Page({
 
     },
     // 当搜索框内容发生改变
-    onSearchChange({detail}) {
-        this.setData({attractionsName:detail})
+    onSearchChange({
+        detail
+    }) {
+        this.setData({
+            attractionsName: detail
+        })
     },
     // 点击搜索
-    onSearchClick(){
+    onSearchClick() {
         this._getAttractionsList(true)
     },
     // 当下拉选择器发生改变
-    changeSelect({detail,target}) {
+    changeSelect({
+        detail,
+        target
+    }) {
         let index = target.dataset.index
-        if(index == '1') {
-            switch(detail) {
+        if (index == '1') {
+            switch (detail) {
                 case 1:
                     this.setData({
                         minFare: '1',
@@ -88,10 +122,12 @@ Page({
                         maxFare: '0'
                     })
             }
-        }else {
-            this.setData({ starRating: detail })
+        } else {
+            this.setData({
+                starRating: detail
+            })
         }
-        console.log(detail,index)
+        console.log(detail, index)
         this._getAttractionsList(true)
     },
     buildSearchParam() {
@@ -105,17 +141,23 @@ Page({
         return param
     },
     // 获取景点列表
-    _getAttractionsList(isRefresh){
-        if(isRefresh) { this.setData({pageIndex:1}) }
-        getAttractionsList(this.data.pageIndex,this.data.pageSize,this.buildSearchParam()).then(({data}) =>{
+    _getAttractionsList(isRefresh) {
+        if (isRefresh) {
+            this.setData({
+                pageIndex: 1
+            })
+        }
+        getAttractionsList(this.data.pageIndex, this.data.pageSize, this.buildSearchParam()).then(({
+            data
+        }) => {
             console.log(data)
-            if(isRefresh) {
-                this.setData({ 
-                    'total' : data.total,
+            if (isRefresh) {
+                this.setData({
+                    'total': data.total,
                     'attractionsList': data.records
                 })
-            }else {
-                let tempDataList = [...this.data.attractionsList,...data.records]
+            } else {
+                let tempDataList = [...this.data.attractionsList, ...data.records]
                 let isSameLength = data.total == tempDataList.length ? true : false
                 console.log(isSameLength)
                 this.setData({
@@ -126,13 +168,15 @@ Page({
         }).catch(err => {
             console.log(err)
         }).finally(() => {
-            this.setData({"isRefresh": false})
+            this.setData({
+                "isRefresh": false
+            })
         })
     },
     // 下拉刷新
     refresh() {
         console.log("下拉刷新")
-        this.setData({ 
+        this.setData({
             "isRefresh": true,
             "pageIndex": 0,
             "total": 0
@@ -142,17 +186,25 @@ Page({
     // 上拉加载更多
     loadMore() {
         console.log("上拉加载更多")
-        if(this.data.isNoMore){ return }
-        this.setData({pageIndex:this.data.pageIndex+1})
+        if (this.data.isNoMore) {
+            return
+        }
+        this.setData({
+            pageIndex: this.data.pageIndex + 1
+        })
         this._getAttractionsList(false)
     },
     // 城市输入框失去焦点
     onCityInputBlur({detail}) {
-        this.setData({ tempCityName: detail.value})
+        this.setData({
+            tempCityName: detail.value
+        })
     },
     // 确定输入城市
     submitCity() {
-        this.setData({ cityName: this.data.tempCityName})
+        this.setData({
+            cityName: this.data.tempCityName
+        })
     },
     // 跳转至详情页
     navToDatailPage({currentTarget}) {

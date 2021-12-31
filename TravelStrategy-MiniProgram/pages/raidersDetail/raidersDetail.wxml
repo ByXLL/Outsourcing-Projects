@@ -1,0 +1,40 @@
+<view class="page-body">
+    <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="{{3000}}">
+        <block wx:for="{{swiperImgs}}" wx:key="*this">
+          <swiper-item>
+            <image mode="aspectFit" src="{{item}}"></image>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="content-wrap">
+        <view class="base-info l-r-padding">
+            <text class="attractions-name">{{detailInfo.name}}</text>
+            <!-- <van-divider custom-style="hairline" hairline /> -->
+            <van-cell-group>
+                <van-cell icon="location-o" center>
+                    <view slot="title">
+                        <view class="cell-lable">定位：{{detailInfo.city}}</view>
+                    </view>
+                </van-cell>
+                <van-cell icon="star-o" center>
+                    <view slot="title">
+                        <view class="cell-lable">星级：<van-rate value="{{ detailInfo.starRating }}" color="#ffd21e"/></view>
+                    </view>
+                </van-cell>
+                <van-cell icon="gold-coin-o" center>
+                    <view slot="title">
+                        <view class="cell-lable">票价：￥{{detailInfo.fare}} 元</view>
+                    </view>
+                </van-cell>
+            </van-cell-group>
+        </view>
+        <view class="detail-title-wrap">
+            <text class="cell-lable">简介</text>
+            <text class="detail-title">{{detailInfo.title}}</text>
+        </view>
+        <view class="detail-info l-r-padding">
+            <rich-text nodes="{{detailInfo.content}}"></rich-text>  
+        </view>
+      </view>
+</view>
+

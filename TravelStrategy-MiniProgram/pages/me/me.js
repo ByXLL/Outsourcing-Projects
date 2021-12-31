@@ -61,13 +61,6 @@ Page({
     onReachBottom: function () {
 
     },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    },
     // 个人主页
     homeClick(){
         let userId = 2

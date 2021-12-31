@@ -45,6 +45,7 @@ Page({
             setStorage('token',data.token)
             setStorage('isLogin', true)
             setStorage('userInfo', data.userInfo)
+            wx.navigateBack()
         }).catch(err => {
             Toast.fail(err.msg);
         }).finally(() => {

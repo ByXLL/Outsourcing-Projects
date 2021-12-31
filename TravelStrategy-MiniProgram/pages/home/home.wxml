@@ -2,7 +2,7 @@
 <!-- 搜索框 -->
 <view class="search">
     <i class="iconfont icon-search2" style="font-size:26rpx;padding:10rpx;"></i>
-    <input placeholder="搜索附近酒店/景点/美食"></input>
+    <input disabled placeholder="搜索附近酒店/景点/美食" bindtap="toRaidersPage"></input>
 </view>
 <!-- banner -->
 <view class="width100">
@@ -13,80 +13,66 @@
           </swiper-item>
         </block>
       </swiper>
-    <!-- <image style="width:100%;" src="/static/sea.jpg"></image> -->
-</view>
-
-<!-- 导航 -->
-<view class="d-row d-jc-around d-ai-centen margin-center nav font24">
-    <view class="text-center" 
-        bindtap="navClick"
-        data-index="{{item.index}}"
-        data-title="{{item.title}}"
-        wx:for="{{navArray}}" 
-        wx:key="title"> 
-        <image class="nav-img" src="/static/shoucang.png"></image> 
-        <text>\n{{item.title}}</text> 
-    </view>
 </view>
 
 <!-- 推荐游玩 -->
 <view class="play">
     <view class="width90 d-row d-jc-between d-ai-centen margin-center padding-10">
-        <view class="font34">推荐游玩</view>
-        <view class="font26 gray2">点击前往 <i class="iconfont icon-youjiantou1" style="position: relative;top: 4rpx;"></i></view>
+        <view class="font34">热门城市</view>
+        <view class="font26 gray2" bindtap="toAttractionsPage">点击前往 <i class="iconfont icon-youjiantou1" style="position: relative;top: 4rpx;"></i></view>
     </view>
 
     <view class="width90 d-row d-jc-around margin-center padding-top-10">
-        <view> <image class="play-img" src="/static/sea.jpg"></image> </view>
-        <view> <image class="play-img" src="/static/sea.jpg"></image> </view>
-        <view> <image class="play-img" src="/static/sea.jpg"></image> </view>
+        <view class="img-warp"> <image class="play-img" mode="aspectFill" src="//t1-q.mafengwo.net/s16/M00/0B/FD/CoUBUl8k9UuADqg6AB1URNDZ7h4431.jpg"></image> </view>
+        <view class="img-warp"> <image class="play-img" mode="aspectFill" src="//t1-q.mafengwo.net/s16/M00/0B/FD/CoUBUl8k9UuADqg6AB1URNDZ7h4431.jpg"></image> </view>
+        <view class="img-warp"> <image class="play-img" mode="aspectFill" src="//t1-q.mafengwo.net/s16/M00/0B/FD/CoUBUl8k9UuADqg6AB1URNDZ7h4431.jpg"></image> </view>
     </view>
 
     <view class="width90 d-f-wrap d-row d-jc-around d-ai-centen margin-center padding-top-10 text-center">
         <view class="play-title"> 
-            <text class="font30">网红打卡地</text> <text class="font24 gray3">\n好看的都在这里</text> 
+            <text class="font30">南宁</text> <text class="font24 gray3">\n好看的都在这里</text> 
         </view>
         <view class="play-title"> 
-            <text class="font30">早餐新吃法</text> <text class="font24 gray3">\n吃出新花样</text> 
+            <text class="font30">北海</text> <text class="font24 gray3">\n吃出新花样</text> 
         </view>
         <view class="play-title"> 
-            <text class="font30">冬季泡汤季</text> <text class="font24 gray3">\n温泉指南</text> 
+            <text class="font30">桂林</text> <text class="font24 gray3">\n温泉指南</text> 
         </view>
 
         <view class="play-title"> 
-            <text class="font30">滑雪必看榜</text> <text class="font24 gray3">\n滑雪新天地</text> 
+            <text class="font30">柳州</text> <text class="font24 gray3">\n滑雪新天地</text> 
         </view>
         <view class="play-title"> 
-            <text class="font30">花开正当时</text> <text class="font24 gray3">\n雨露自不知</text> 
+            <text class="font30">防城港</text> <text class="font24 gray3">\n雨露自不知</text> 
         </view>
         <view class="play-title"> 
-            <text class="font30">温泉度假带</text> <text class="font24 gray3">\n这些地方不会错</text> 
+            <text class="font30">钦州</text> <text class="font24 gray3">\n这些地方不会错</text> 
         </view>
     </view>
 
 </view>
 
-<!-- 小视频 -->
+<!-- 热门攻略 -->
 <view class="play">
     <view class="width90 d-row d-jc-between d-ai-centen margin-center padding-20">
         <view class="font34">热门攻略</view>
-        <view class="font26 gray2">点击前往<i class="iconfont icon-youjiantou1" style="position: relative;top: 4rpx;"></i></view>
+        <view class="font26 gray2" bindtap="toRaidersPage">点击前往<i class="iconfont icon-youjiantou1" style="position: relative;top: 4rpx;"></i></view>
     </view>
 
     <view class="video-list width90 d-row d-jc-between margin-center padding-bottom-50">
-        <block wx:for="{{10}}" wx:key="index">
+        <block wx:for="{{raidersList}}" wx:key="id">
             <view class="video-item"> 
-                <image class="video" src="/static/sea.jpg"></image> 
+                <image class="video" data-id="{{item.id}}" bindtap="toRaidersDetail" src="{{item.coverPic}}"></image> 
                 <view class="video-info">
-                    <view class="video-title">这里是景点标题信息这里是景点标题信息这里是景点标题信息这里是景点标题信息这里是景点标题信息</view>
+                    <view class="video-title">{{item.title}}</view>
                     <view class="other-info">
-                        <view class="left">
-                            <image class="user-avatar" src="/static/shoucang.png"></image>
-                            <text class="user-name">用户名</text>
+                        <view class="left" data-authorId="{{item.authorId}}" bindtap="toUserInfo">
+                            <image class="user-avatar" src="{{item.avatar}}"></image>
+                            <text class="user-name">{{item.author}}</text>
                         </view>
                         <view class="right">
                             <image class="icon-stat" src="/static/shoucang.png"></image>
-                            <text class="stat-count">100</text>
+                            <text class="stat-count">{{item.startCount}}</text>
                         </view>
                     </view>
                 </view>
