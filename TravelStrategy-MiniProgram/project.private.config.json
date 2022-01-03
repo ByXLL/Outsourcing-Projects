@@ -51,7 +51,7 @@
         {
           "name": "",
           "pathName": "pages/raidersDetail/raidersDetail",
-          "query": "id=2&authorId=2&avatar=http://cdn.byxll.cn/avatar-editor.jpg",
+          "query": "id=1&authorId=2&avatar=http://cdn.byxll.cn/avatar-editor.jpg",
           "scene": null
         },
         {

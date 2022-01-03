@@ -1,5 +1,6 @@
 package com.mali.travelstrategy.service.impl;
 
+import com.mali.travelstrategy.entity.ApiResult;
 import com.mali.travelstrategy.entity.RaidersComment;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,15 @@ class RaidersCommentServiceImplTest {
             raidersCommentService.add(raidersComment);
         }
     }
+    @Test
+    void findByPager() {
+        ApiResult pager = raidersCommentService.findByPager(1, 10);
+        System.out.println();
+    }
 
     @Test
     void findPagerByRaidersId() {
-        raidersCommentService.findPagerByRaidersId(1,1,10);
+        ApiResult result = raidersCommentService.findPagerByRaidersId(1, 1, 10);
+        System.out.println();
     }
 }

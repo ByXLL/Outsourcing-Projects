@@ -6,6 +6,12 @@
         from raiders_comment as rc
             inner join user on user.id = rc.user_id
             inner join raiders as ra on ra.id = rc.raiders_id
-        ${ew.sqlSegment}
+        where 1 = 1
+        <if test="ew != null">
+            <if test="!ew.emptyOfWhere">
+                AND
+            </if>
+            ${ew.sqlSegment}
+        </if>
     </select>
 </mapper>

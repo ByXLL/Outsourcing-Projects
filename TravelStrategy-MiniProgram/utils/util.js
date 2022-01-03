@@ -136,7 +136,7 @@ function objectToQueryString(obj) {
  * 本地缓存
  */
 function setStorage(key,data) {
-  wx.setStorage({
+  wx.setStorageSync({
     key: key,
     data: data
   })
@@ -146,25 +146,20 @@ function setStorage(key,data) {
  * 获取本地缓存
  */
 function getStorageByKey(key) {
-  wx.getStorage({
-    key: key,
-    success (res) {
-      return res.data
-    }
-  })
+  return wx.getStorageSync(key)
 }
 /**
  * 删除本地缓存
  */
 function deleteStorageByKey(key) {
-  wx.removeStorage({key: key})
+  wx.removeStorageSync({key: key})
   app.globalData[key] = null
 }
 /**
  * 清空本地缓存
  */
 function clearStorage() {
-  wx.clearStorage()
+  wx.clearStorageSync()
 }
 
 

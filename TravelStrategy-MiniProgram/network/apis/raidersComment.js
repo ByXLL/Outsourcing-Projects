@@ -9,9 +9,8 @@ export function addAttractions(data) {
   })
 }
 // 通过攻略id获取攻略评论
-export function getRaidersCommentById(query) {
+export function getRaidersCommentById(raidersId,page,pageSize) {
   return request({
-    url: `/raiders-comment/find`,
-    data: {...query}
+    url: `/raiders-comment/find?raidersId=${raidersId}&page=${page}&pageSize=${pageSize}`
   })
 }

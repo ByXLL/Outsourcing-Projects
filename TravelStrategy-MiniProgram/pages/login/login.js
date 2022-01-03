@@ -45,7 +45,10 @@ Page({
             setStorage('token',data.token)
             setStorage('isLogin', true)
             setStorage('userInfo', data.userInfo)
-            wx.navigateBack()
+            // wx.navigateBack()
+            wx.navigateBack({
+                delta: 1
+              })
         }).catch(err => {
             Toast.fail(err.msg);
         }).finally(() => {

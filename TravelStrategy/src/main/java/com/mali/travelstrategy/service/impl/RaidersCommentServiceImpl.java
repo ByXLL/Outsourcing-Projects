@@ -77,7 +77,7 @@ public class RaidersCommentServiceImpl extends ServiceImpl<RaidersCommentMapper,
     public ApiResult findPagerByRaidersId(Integer raidersId, Integer page, Integer pageSize) {
         if(raidersId == null || page == null || pageSize == null) { return new ApiResult(HttpCodeEnum.ARG_ERROR.getCode(), "参数异常"); }
         QueryWrapper<RaidersCommentVO> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("raiders_id",raidersId);
+        queryWrapper.eq("rc.raiders_id",raidersId);
         queryWrapper.orderByDesc("rc.create_time");
         IPage<RaidersCommentVO> commentDetails = raidersCommentMapper.selectRaidersCommentDetails(new Page<>(page, pageSize), queryWrapper);
         return new ApiResult(HttpCodeEnum.SUCCESS.getCode(), "操作成功", commentDetails);

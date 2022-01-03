@@ -6,11 +6,7 @@ import com.mali.travelstrategy.entity.ApiResult;
 import com.mali.travelstrategy.entity.RaidersComment;
 import com.mali.travelstrategy.service.impl.RaidersCommentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 
@@ -25,7 +21,7 @@ public class AppRaidersCommentController {
     private RaidersCommentServiceImpl raidersCommentService;
 
     @PostMapping("/add")
-    public ApiResult add(RaidersComment raidersComment){
+    public ApiResult add(@RequestBody RaidersComment raidersComment){
         return raidersCommentService.add(raidersComment);
     }
 

@@ -24,7 +24,7 @@ export default function(options) {
             setStorage("isLogin",false)
             setStorage("token", '')
             setStorage("userInfo", '')
-            wx.reLaunch({url: `/pages/login/login`})
+            wx.navigateTo({url: `/pages/login/login`})
           }
           return reject(res.data)
         }
