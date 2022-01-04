@@ -65,24 +65,28 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this._getAttractionsList(true)
     },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-        // 隐藏 tabBar 某一项的右上角的红点
-        wx.hideTabBarRedDot({
-            index: 2
-        })
+        // // 隐藏 tabBar 某一项的右上角的红点
+        // wx.hideTabBarRedDot({
+        //     index: 2
+        // })
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        let tempCityName = getApp().globalData.tempCityName
+        this.setData({
+            tempCityName: tempCityName,
+            cityName: tempCityName
+        })
+        this._getAttractionsList(true)
     },
     /**
      * 页面上拉触底事件的处理函数

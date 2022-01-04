@@ -146,7 +146,9 @@ Page({
     })
   },
   // 跳转景点列表页
-  toAttractionsPage() {
+  toAttractionsPage(e) {
+    let city = e.currentTarget.dataset.city
+    getApp().globalData.tempCityName = city
     wx.switchTab({
       url: `/pages/attractions/attractions`
     })

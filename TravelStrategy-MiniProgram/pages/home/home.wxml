@@ -29,23 +29,23 @@
     </view>
 
     <view class="width90 d-f-wrap d-row d-jc-around d-ai-centen margin-center padding-top-10 text-center">
-        <view class="play-title"> 
+        <view class="play-title" bindtap="toAttractionsPage" data-city="南宁"> 
             <text class="font30">南宁</text> <text class="font24 gray3">\n好看的都在这里</text> 
         </view>
-        <view class="play-title"> 
+        <view class="play-title" bindtap="toAttractionsPage" data-city="北海"> 
             <text class="font30">北海</text> <text class="font24 gray3">\n吃出新花样</text> 
         </view>
-        <view class="play-title"> 
+        <view class="play-title" bindtap="toAttractionsPage" data-city="桂林"> 
             <text class="font30">桂林</text> <text class="font24 gray3">\n温泉指南</text> 
         </view>
 
-        <view class="play-title"> 
+        <view class="play-title" bindtap="toAttractionsPage" data-city="柳州"> 
             <text class="font30">柳州</text> <text class="font24 gray3">\n滑雪新天地</text> 
         </view>
-        <view class="play-title"> 
+        <view class="play-title" bindtap="toAttractionsPage" data-city="防城港"> 
             <text class="font30">防城港</text> <text class="font24 gray3">\n雨露自不知</text> 
         </view>
-        <view class="play-title"> 
+        <view class="play-title" bindtap="toAttractionsPage" data-city="钦州"> 
             <text class="font30">钦州</text> <text class="font24 gray3">\n这些地方不会错</text> 
         </view>
     </view>

@@ -19,7 +19,7 @@
           <view class="city-search-form">
             <view class="search">
               <i class="iconfont icon-search2" style="font-size:26rpx;padding:10rpx;"></i>
-              <input class="city-input" placeholder="请输入城市名称" bindblur="onCityInputBlur"></input>
+              <input class="city-input" placeholder="请输入城市名称" value="{{tempCityName}}" bindblur="onCityInputBlur"></input>
             </view>
             <view class="btn-warp">
               <van-button icon="search" round type="info" size="small" bindtap="submitCity">确定</van-button>                 

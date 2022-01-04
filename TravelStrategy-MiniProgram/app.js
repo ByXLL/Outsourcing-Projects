@@ -22,6 +22,7 @@ App({
   globalData: {
     isLogin: false,
     token: '',
-    userInfo: null
+    userInfo: null,
+    tempCityName: '',
   }
 })
