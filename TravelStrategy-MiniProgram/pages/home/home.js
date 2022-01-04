@@ -6,29 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    navClickIndex:'',
-    navArray:[
-      {
-        index:0,
-        title:'攻略'
-      },
-      {
-        index:1,
-        title:'门票'
-      },
-      {
-        index:2,
-        title:'美食'
-      },
-      {
-        index:3,
-        title:'周边游'
-      },
-      {
-        index:4,
-        title:'游记'
-      },
-    ],
     swiperImgs: [
       '/static/swiper/banner1.jpg',
       '/static/swiper/banner2.jpg',
@@ -86,24 +63,15 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    this.setData({pageIndex:this.data.pageIndex+1})
     if(!this.data.isNoMore) {
-      
+      this.getRaidersList(false)
     }
-  },
-  /**
-   * 点击导航
-   */
-  navClick(event){
-    console.log(JSON.stringify(event))
-    let index = event.currentTarget.dataset['index'];
-    let title = event.currentTarget.dataset['title'];
-    console.log("index",index)
-    console.log("title",title)
   },
   // 获取攻略列表
   getRaidersList(isRefresh) {
     if(isRefresh) { this.setData({pageIndex:1}) }
-    let data = {}
+    let data = {selectType:1}
     getRaidersByParamPager(this.data.pageIndex,10,data).then(({data}) => {
       console.log(data)
       if(isRefresh) {

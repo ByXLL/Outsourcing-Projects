@@ -1,1 +1,129 @@
-/* pages/raiders/raiders.wxss */
+/* pages/home/home.wxss */
+page{
+  background-color: #eeeeee;
+}
+.search-warp, .dropdown-menu{
+  height: 80rpx !important;
+}
+.search{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin:0 auto;
+  height: 60rpx;
+  border-radius: 20rpx;
+  color: #666666;
+  background-color: #eeeeee;
+  font-size: 28rpx;
+}
+.city-search-form{
+  display: flex;
+  height: 80rpx;
+  align-items: center;
+}
+.city-search-form .btn-warp{
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+.city-input {
+  text-align: left;
+}
+
+/* 游玩 */
+.play{
+  width: 100%;
+  /* height: 560rpx; */
+  background-color: #ffffff;
+  margin-top: 20rpx;
+  border-radius: 20rpx;
+
+}
+.play-img{
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 20rpx;
+
+}
+.img-warp{
+  /* padding: 0 10px; */
+}
+
+.play-title{
+  width: 200rpx;
+  height: 86rpx;
+  padding: 10rpx;
+  border-radius: 10rpx;
+  border:1rpx solid #eeeeee;
+  font-size: 30rpx;
+  margin-bottom: 5rpx;
+}
+
+/* 小视频 */
+.video-list{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 10rpx;
+}
+.video-item {
+  width: calc(50% - 40rpx);
+  padding: 10rpx 20rpx;
+  margin-bottom: 20rpx;
+}
+.video-item .video {
+  width: 100%;
+  height: 458rpx;
+  border-radius: 20rpx;  
+}
+.video-item .video-info {}
+.video-item .video-info .video-title {
+  font-size: 26rpx;
+  line-height: 39rpx;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* 这里是超出几行省略 */
+  overflow: hidden;
+}
+.video-item .video-info .other-info{
+  display: flex;
+}
+
+.video-item .video-info .left{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+}
+
+.video-item .video-info .right{
+  flex: 1;
+  align-items: center;
+}
+
+.video-item .video-info .user-avatar {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+}
+.video-item .video-info .user-name {
+  margin-left: 10rpx;
+}
+.video-item .video-info .right{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.video-item .video-info .right .icon-stat{
+  width: 30rpx;
+  height: 30rpx;
+}
+.video-item .video-info .right .stat-count{
+  color: #ccc;
+  font-size: 24rpx;
+  margin-left: 10rpx;
+}
+
+.video-item .video {}

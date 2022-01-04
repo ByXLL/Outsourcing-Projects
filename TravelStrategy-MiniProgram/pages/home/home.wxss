@@ -27,19 +27,6 @@ page{
     margin-left: -275rpx;
     z-index: 10000;
 }
-/* 动画 */
-@keyframes animation-search{
-    0%   {top: 180rpx; left: 20%;}
-    25%  {top: 160rpx; left: 30%;}
-    50%  {top: 140rpx; left: 40%;}
-    100% {top: 100rpx; left: 50%;}
-}
-@-webkit-keyframes animation-search{
-    0%   {top: 180rpx; left: 20%;}
-    25%  {top: 160rpx; left: 30%;}
-    50%  {top: 140rpx; left: 40%;}
-    100% {top: 100rpx; left: 50%;}
-}
 
 .nav{
     width: 686rpx;

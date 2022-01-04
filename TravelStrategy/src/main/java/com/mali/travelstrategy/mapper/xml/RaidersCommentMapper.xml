@@ -8,9 +8,7 @@
             inner join raiders as ra on ra.id = rc.raiders_id
         where 1 = 1
         <if test="ew != null">
-            <if test="!ew.emptyOfWhere">
-                AND
-            </if>
+            <if test="!ew.emptyOfWhere"> AND </if>
             ${ew.sqlSegment}
         </if>
     </select>

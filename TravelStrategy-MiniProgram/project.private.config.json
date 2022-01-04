@@ -59,6 +59,12 @@
           "pathName": "pages/me/me",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/raiders/raiders",
+          "query": "",
+          "scene": null
         }
       ]
     }

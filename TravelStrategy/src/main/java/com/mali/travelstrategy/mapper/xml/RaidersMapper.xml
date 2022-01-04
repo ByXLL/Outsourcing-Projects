@@ -8,7 +8,13 @@
             where rs.raiders_id = raiders.id
         ) as `start_count`, raiders .*, user.avatar
         from raiders inner join user on author_id = user.id
-        ${ew.sqlSegment}
+        where 1 = 1
+        <if test="ew != null">
+            <if test="!ew.emptyOfWhere">
+                AND
+            </if>
+            ${ew.sqlSegment}
+        </if>
     </select>
 
     <select id="findStatListByRaidersId" resultType="com.mali.travelstrategy.vo.RaidersStatVo">
