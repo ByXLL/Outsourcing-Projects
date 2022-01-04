@@ -10,18 +10,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserAttentionService extends IService<UserAttention> {
     /**
-     * 添加
+     * 编辑用户关注 添加关注/取消关注
      * @param userAttention     关注信息关联实体
      * @return                  响应数据
      */
-    ApiResult add(UserAttention userAttention);
-
-    /**
-     * 删除
-     * @param id        主键
-     * @return          响应数据
-     */
-    ApiResult delete(Integer id);
+    ApiResult editUserAttention(UserAttention userAttention);
 
     /**
      * 查询用户得所有关注用户

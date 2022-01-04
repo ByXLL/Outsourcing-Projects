@@ -5,6 +5,7 @@ import com.mali.travelstrategy.annotation.PassTokenRequired;
 import com.mali.travelstrategy.entity.ApiResult;
 import com.mali.travelstrategy.service.impl.RaidersStatServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,14 +23,15 @@ public class AppRaidersStatController {
     @Autowired
     private RaidersStatServiceImpl raidersStatService;
 
-    @PostMapping("/add")
+    @PostMapping("/editRaidersStat")
     public ApiResult add(@PathParam("raidersId") Integer raidersId, @PathParam("userId") Integer userId) {
-        return raidersStatService.add(raidersId, userId);
+        return raidersStatService.editRaidersStat(raidersId, userId);
     }
 
-    @PostMapping("/delete")
-    public ApiResult delete(@PathParam("raidersId") Integer raidersId, @PathParam("userId") Integer userId) {
-        return raidersStatService.delete(raidersId, userId);
+    @PassTokenRequired
+    @GetMapping("/getList")
+    public ApiResult getList(@PathParam("raidersId") Integer raidersId) {
+        return raidersStatService.getList(raidersId);
     }
 }
 

@@ -6,11 +6,7 @@ import com.mali.travelstrategy.entity.ApiResult;
 import com.mali.travelstrategy.entity.UserAttention;
 import com.mali.travelstrategy.service.impl.UserAttentionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 
@@ -24,14 +20,9 @@ public class AppUserAttentionController {
     @Autowired
     private UserAttentionServiceImpl userAttentionService;
 
-    @PostMapping("/add")
-    public ApiResult add(UserAttention userAttention) {
-        return userAttentionService.add(userAttention);
-    }
-
-    @PostMapping("/del")
-    public ApiResult delete(@PathParam("id") Integer id) {
-        return userAttentionService.delete(id);
+    @PostMapping("/editUserAttention")
+    public ApiResult editUserAttention(@RequestBody UserAttention userAttention) {
+        return userAttentionService.editUserAttention(userAttention);
     }
 
     @GetMapping("/findByUserId")

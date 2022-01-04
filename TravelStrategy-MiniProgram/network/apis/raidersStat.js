@@ -1,17 +1,18 @@
 import request from '../request.js'
 
-// 添加攻略点赞
-export function addStat(raidersId,userId) {
+// 编辑攻略点赞 点赞/取消点赞
+export function editRaidersStat(raidersId,userId) {
   return request({
     method: 'post',
-    url: `/raiders-start/add?${raidersId}&userId=${userId}`,
+    url: `/raiders-start/editRaidersStat?raidersId=${raidersId}&userId=${userId}`,
   })
 }
 
-// 删除攻略点赞
-export function delStat(raidersId,userId) {
+
+// 获取攻略点赞列表
+export function getStatList(raidersId) {
   return request({
-    method: 'post',
-    url: `/raiders-start/delete?${raidersId}&userId=${userId}`,
+    url: `/raiders-start/getList?raidersId=${raidersId}`,
   })
 }
+

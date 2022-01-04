@@ -61,6 +61,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 userInfo = JWT.decode(token).getClaims().get("userInfo").asMap();
                 role = (Integer) userInfo.get("role");
             } catch (JWTDecodeException j) {
+                j.printStackTrace();
                 throw new LoginException("401,权限异常");
             }
 //            User user = userService.getById(Integer.parseInt(userId));
@@ -72,6 +73,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             try {
                 jwtVerifier.verify(token);
             } catch (JWTVerificationException e) {
+                e.printStackTrace();
                 throw new LoginException("401,权限异常");
             }
             boolean isAdminPath = requestPath.contains("/admin/");

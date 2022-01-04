@@ -2,6 +2,7 @@ package com.mali.travelstrategy.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.mali.travelstrategy.entity.ApiResult;
+import com.mali.travelstrategy.entity.RaidersStat;
 import com.mali.travelstrategy.entity.User;
 import com.mali.travelstrategy.entity.UserAttention;
 import com.mali.travelstrategy.enums.HttpCodeEnum;
@@ -31,33 +32,33 @@ public class UserAttentionServiceImpl extends ServiceImpl<UserAttentionMapper, U
     private UserAttentionMapper userAttentionMapper;
 
     /**
-     * 添加
+     * 编辑用户关注 添加关注/取消关注
      * @param userAttention 关注信息关联实体
      * @return 响应数据
      */
     @Override
-    public ApiResult add(UserAttention userAttention) {
+    public ApiResult editUserAttention(UserAttention userAttention) {
         if(userAttention == null) { return new ApiResult(HttpCodeEnum.ARG_ERROR.getCode(),"参数异常"); }
         User targetUser = userMapper.selectById(userAttention.getTargetUserId());
         User sourceUser = userMapper.selectById(userAttention.getUserId());
         if(targetUser == null || sourceUser == null) { return new ApiResult(HttpCodeEnum.ARG_ERROR.getCode(),"操作失败");  }
-        int i = userAttentionMapper.insert(userAttention);
-        if(i>0) { return new ApiResult(HttpCodeEnum.SUCCESS.getCode(),"关注成功");}
-        return new ApiResult(HttpCodeEnum.ARG_ERROR.getCode(),"操作失败");
+
+        QueryWrapper<UserAttention> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("target_user_id",targetUser.getId());
+        queryWrapper.eq("user_id",sourceUser.getId());
+        UserAttention userAttention1 = userAttentionMapper.selectOne(queryWrapper);
+        if(userAttention1 == null) {
+            int i = userAttentionMapper.insert(userAttention);
+            if(i>0) { return new ApiResult(HttpCodeEnum.SUCCESS.getCode(),"关注成功");}
+            return new ApiResult(HttpCodeEnum.ARG_ERROR.getCode(),"操作失败");
+        }else {
+            int i = userAttentionMapper.deleteById(userAttention1.getId());
+            if(i>0) { return new ApiResult(HttpCodeEnum.SUCCESS.getCode(),"取消关注成功");}
+            return new ApiResult(HttpCodeEnum.ARG_ERROR.getCode(),"操作失败");
+        }
     }
 
-    /**
-     * 删除
-     * @param id 主键
-     * @return 响应数据
-     */
-    @Override
-    public ApiResult delete(Integer id) {
-        if(id == null){ return new ApiResult(HttpCodeEnum.ARG_ERROR.getCode(),"参数异常"); }
-        int i = userAttentionMapper.deleteById(id);
-        if(i>0) { return new ApiResult(HttpCodeEnum.SUCCESS.getCode(),"取消关注成功");}
-        return new ApiResult(HttpCodeEnum.ARG_ERROR.getCode(),"操作失败");
-    }
+
 
     /**
      * 查询用户关注的所有用户

@@ -136,11 +136,12 @@ function objectToQueryString(obj) {
  * 本地缓存
  */
 function setStorage(key,data) {
-  wx.setStorageSync({
+  wx.setStorage({
     key: key,
     data: data
   })
   app.globalData[key] = data
+  console.log(key,data)
 }
 /**
  * 获取本地缓存

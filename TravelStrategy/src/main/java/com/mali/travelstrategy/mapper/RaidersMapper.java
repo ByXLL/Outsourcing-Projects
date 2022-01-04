@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.mali.travelstrategy.entity.Raiders;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mali.travelstrategy.vo.RaidersDetailsVO;
+import com.mali.travelstrategy.vo.RaidersStatVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -25,4 +26,11 @@ public interface RaidersMapper extends BaseMapper<Raiders> {
      * @return      响应数据
      */
     IPage<RaidersDetailsVO> selectRaidersDetails(IPage<RaidersDetailsVO> page, @Param(Constants.WRAPPER) QueryWrapper<RaidersDetailsVO> ew);
+
+    /**
+     * 查询攻略点赞列表
+     * @param raidersId     攻略id
+     * @return              点赞列表
+     */
+    List<RaidersStatVo> findStatListByRaidersId(Integer raidersId);
 }

@@ -10,18 +10,19 @@
       <view class="content-wrap">
         <view class="base-info l-r-padding">
             <view class="user-name__footprint">
-                <image class="user-head__avatar" lazyLoad="{{true}}" mode="aspectFill" src="{{avatar}}"></image>
+                <image bindtap="toUserHomePage" class="user-head__avatar" lazyLoad="{{true}}" mode="aspectFill" src="{{avatar}}"></image>
                 <view class="other-info-warp">
                     <view class="user-name">{{detailInfo.author}}</view>   
                     <view class="createTime">{{common.formatTime2(detailInfo.createTime)}}</view>            
                 </view>
                 <view class="opreate">
-                    <!-- <view bindtap="followUser" class="opreate-edit opreate-edit__finish">
-                        <view class="opreate-edit__icon opreate-follow__icon-finish"></view>
-                        已关注
-                    </view> -->
                     <view bindtap="followUser" class="opreate-edit opreate-edit__wait">
-                        <view class="opreate-edit__icon opreate-follow__icon-wait"></view>关注
+                        <block wx:if="{{!isWatching}}">
+                            <view class="opreate-edit__icon opreate-follow__icon-wait"></view>关注                        
+                        </block>
+                        <block wx:else="{{isWatching}}">
+                            <view class="opreate-edit__icon opreate-follow__icon-finish"></view>已关注
+                        </block>
                     </view>
                 </view>
             </view>
@@ -32,6 +33,18 @@
         </view>
         <view class="detail-info l-r-padding">
             <rich-text nodes="{{detailInfo.content}}"></rich-text>
+            <van-divider />
+            <view class="star-list">
+                <view class="avtar-list">
+                    <block wx:for="{{starList}}" wx:key="index" wx:if="{{index<6}}">
+                        <image class="user-vatar" lazyLoad="{{true}}" mode="aspectFill" src="{{item.avatar}}"></image>
+                    </block>
+                    <text wx:if="{{starList.length > 6}}">...</text>
+                </view>
+                <view class="star-btn-wrap">
+                    <van-button bind:click="clickStar" round icon="{{ isStared ? 'star' : 'star-o'}}" color="{{isStared ? 'linear-gradient(90deg, #65d3e8,#7dc3f2)' : '#ffdb26'}}" type="primary" size="small">{{starList.length}}</van-button>
+                </view>
+            </view>
         </view>
         <view class="comment-list">
             <view class="comment-form">

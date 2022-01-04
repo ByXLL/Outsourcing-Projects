@@ -10,4 +10,10 @@
         from raiders inner join user on author_id = user.id
         ${ew.sqlSegment}
     </select>
+
+    <select id="findStatListByRaidersId" resultType="com.mali.travelstrategy.vo.RaidersStatVo">
+        select rs.*, user.avatar, user.nick_name from raiders_stat as rs
+            inner join user on user.id = rs.user_id
+        where rs.raiders_id = #{raidersId}
+    </select>
 </mapper>

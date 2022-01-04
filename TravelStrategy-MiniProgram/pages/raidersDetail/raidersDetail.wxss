@@ -53,7 +53,7 @@
 }
 
 .opreate-edit__finish {
-  background: hsla(0,0%,100%,.4);
+  background: #ffdb26;
   color: #474747;
 }
 
@@ -119,6 +119,23 @@
   margin-top: 30rpx;
   background-color: #ffffff;
   padding: 30rpx;
+}
+.detail-info .star-list{
+  display: flex;
+  height: 80rpx;
+  align-items: center;
+}
+.detail-info .star-list .avtar-list{
+  flex: 1;
+}
+.detail-info .star-list .avtar-list .user-vatar{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+}
+.detail-info .star-list .star-btn-wrap{
+  margin: 0 20rpx;
 }
 
 .comment-list{

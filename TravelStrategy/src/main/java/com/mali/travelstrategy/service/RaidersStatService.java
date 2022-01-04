@@ -10,18 +10,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface RaidersStatService extends IService<RaidersStat> {
     /**
-     * 添加点赞
+     * 编辑攻略点赞 点赞/取消点赞
      * @param raidersId     攻略id
      * @param userId        用户id
      * @return              响应数据
      */
-    ApiResult add(Integer raidersId, Integer userId);
+    ApiResult editRaidersStat(Integer raidersId, Integer userId);
 
     /**
-     * 取消点赞
+     * 获取点赞列表
      * @param raidersId     攻略id
-     * @param userId        用户id
      * @return              响应数据
      */
-    ApiResult delete(Integer raidersId, Integer userId);
+    ApiResult getList(Integer raidersId);
 }

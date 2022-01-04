@@ -1,6 +1,8 @@
 // pages/attractionsDetail/attractionsDetail.js
-import {getRaidersById,getRaidersByIdAndStat} from "../../network/apis/raiders.js"
+import {getRaidersById} from "../../network/apis/raiders.js"
 import {addAttractions,getRaidersCommentById} from "../../network/apis/raidersComment.js"
+import {getStatList,editRaidersStat} from "../../network/apis/raidersStat.js"
+import {isWatchUser,editUserAttention} from "../../network/apis/userAttention.js"
 import {getStorageByKey} from "../../utils/util.js"
 import Toast from "@vant/weapp/toast/toast"
 
@@ -20,6 +22,8 @@ Page({
         detailInfo: {},
         swiperImgs: [],
         commentList: [],
+        userInfo: {},
+        isWatching: false,
     },
 
     /**
@@ -34,6 +38,7 @@ Page({
         })
         this._getRaidersById()
         this._getRaidersCommentById()
+        this._getStatList()
     },
 
     /**
@@ -47,7 +52,11 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        let userInfo = getStorageByKey("userInfo")
+        this.setData({
+            userInfo: userInfo
+        })
+        this.getIsWatchUser()
     },
       /**
      * 页面上拉触底事件的处理函数
@@ -95,6 +104,17 @@ Page({
           console.log(err)
         })
     },
+    // 获取攻略点赞列表
+    _getStatList() {
+        getStatList(this.data.id).then(({data}) => {
+            this.setData({
+                starList: data
+            })
+            this.isStared(data)
+        }).catch(err => {
+            console.log(err)
+        })
+    },
     // 输入
     onInputBlur({detail}) {
         this.setData({
@@ -104,15 +124,13 @@ Page({
 
     // 去评论
     toComment() {
-        let userInfo = getStorageByKey("userInfo")
-        console.log(userInfo)
         let commentValue = this.data.commentValue
         if(commentValue.trim() == "") {
             return Toast.fail('请输入评论内容')
         }
         let data = {
             raidersId: this.data.id,
-            userId: userInfo.id,
+            userId: this.data.userInfo.id,
             content: this.data.commentValue
         }
         addAttractions(data).then(res => {
@@ -122,6 +140,59 @@ Page({
             this._getRaidersCommentById(true)
         }).catch(err => {
             Toast.fail("添加评论失败")
+        })
+    },
+    // 跳转至用户主页
+    toUserHomePage() {
+        let userId = this.data.authorId
+        wx.navigateTo({
+            url: `/pages/userInfo/userInfo?userId=${userId}`
+        })
+    },
+    // 判断是否已经点赞了
+    isStared(data) {
+        console.log('点赞的数据',data)
+        let isStared = data.length < 1 ? false : data.some(item => item.userId == this.data.userInfo.id)
+        console.log(isStared)
+        this.setData({isStared})
+    },
+    // 点击点赞
+    clickStar() {
+        let isStared = this.data.isStared
+        let raidersId = this.data.detailInfo.id
+        let userId = this.data.userInfo.id
+        editRaidersStat(raidersId,userId).then((res) => {
+            console.log(res)
+            Toast.success(res.msg)
+            this._getStatList()
+        }).catch(err => {
+            Toast.fail("操作失败")
+            console.log(err)
+        })
+    },
+    // 获取用户关注信息
+    getIsWatchUser() {
+        isWatchUser(this.data.authorId, this.data.userInfo.id).then(({data}) => {
+            console.log(data)
+            this.setData({isWatching:data.isWatching})
+        }).catch(err => {
+            console.log(err)
+        })
+    },
+    // 添加关注/取消关注
+    followUser() {
+        let data = {
+            targetUserId: this.data.authorId,
+            userId: this.data.userInfo.id
+        }
+        console.log(data)
+        editUserAttention(data).then((res) => {
+            console.log(res)
+            Toast.success(res.msg)
+            this.getIsWatchUser()
+        }).catch(err => {
+            Toast.fail("操作失败")
+            console.log(err)
         })
     }
 })
