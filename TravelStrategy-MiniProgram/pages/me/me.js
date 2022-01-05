@@ -10,7 +10,7 @@ Page({
      */
     data: {
         userInfo: {},
-        userStarInfo: {}
+        userStarInfo: {},
     },
 
     /**
@@ -110,12 +110,12 @@ Page({
         })
     },
     toRelease() {
-
+        console.log('11111')
     },
     toLove() {
 
     },
     toStar() {
 
-    }
+    },
 })

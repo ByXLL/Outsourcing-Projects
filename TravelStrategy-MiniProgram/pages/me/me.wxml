@@ -33,10 +33,10 @@
                 <image class="coll-img" src="/static/me/release.png"></image> 
                 <text> \n 我的发布 </text> 
             </view>
-            <view class="text-center" bindtap="toLove"> 
+            <!-- <view class="text-center" bindtap="toLove"> 
                 <image class="coll-img" src="/static/me/love.png"></image> 
                 <text> \n 我的关注 </text> 
-            </view>
+            </view> -->
             <view class="text-center" bindtap="toStar"> 
                 <image class="coll-img" src="/static/me/star.png"></image> 
                 <text> \n 我的收藏 </text> 

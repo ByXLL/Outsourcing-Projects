@@ -13,7 +13,8 @@
     "pages/raidersDetail/raidersDetail",
     "pages/raiders/raiders",
     "pages/userProfile/userProfile",
-    "pages/release/release"
+    "pages/release/release",
+    "pages/raidersList/raidersList"
   ],
   "permission": {
     "scope.userLocation": {

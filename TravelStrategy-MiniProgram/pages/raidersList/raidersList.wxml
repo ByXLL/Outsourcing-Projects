@@ -1,0 +1,25 @@
+<wxs module="common" src="/wxs/common.wxs"></wxs>
+<scroll-view slot bindscrolltolower="bindLoadmore" class="page-scroll iphoneX" enableBackToTop="true" lowerThreshold="200" scrollWithAnimation="true" scrollY="true">
+    <view>
+        <view class="list">
+            <view class="item" wx:for="{{raidersList}}" wx:key="id" >
+                <image bindtap="toRaidersDetail" data-id="{{item.id}}" class="pic" lazyLoad="{{true}}" mode="aspectFill" src="{{item.coverPic}}"></image>
+                <view class="content pic_width">
+                    <view class="title" bindtap="toRaidersDetail" data-id="{{item.id}}">{{item.title}}</view>
+                    <view class="">
+                        <view class="time">发布于 {{common.formatTime(item.createTime)}}</view>
+                        <view class="like">
+                            <text class="f-blod">999</text> 点赞                        
+                          <view class="btn-warp">
+                            <van-button style="margin-right: 20rpx;" round type="info" size="small" data-id="{{item.id}}" bind:click="toEdit">编辑</van-button>
+                            <van-button round type="danger" size="small" data-id="{{item.id}}" bind:click="toDelete">删除</van-button>
+                          </view>                        
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

@@ -77,6 +77,12 @@
           "pathName": "pages/release/release",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/raidersList/raidersList",
+          "query": "userId=2",
+          "scene": null
         }
       ]
     }

@@ -2,20 +2,34 @@ import {
   baseURL
 } from '../../network/config.js'
 import {getStorageByKey} from "../../utils/util.js"
-import {addRaiders} from "../../network/apis/raiders.js"
+import {addRaiders,getRaidersById} from "../../network/apis/raiders.js"
 import Toast from "@vant/weapp/toast/toast"
 Page({
   data: {
+    id: '',
     title: '',
     formats: {},
     readOnly: false,
     placeholder: '开始输入...',
     coverPicList: [],
     bigPicList: [],
+    raidersInfo: {},
+    isEdit: false,
   },
-
-  onLoad() {
-
+  onLoad(option) {
+    let id = option.id
+    if(id != undefined) {
+      this.setData({id,isEdit:true})
+      this._getRaidersById()
+    }
+  },
+  // 获取攻略详情
+  _getRaidersById() {
+    getRaidersById(this.data.id).then(({data}) => {
+      this.setData({raidersInfo:data})
+    }).catch(err => {
+      console.log(err)
+    })
   },
   async formSubmit(e) {
     let data = await this.buildFormData()
