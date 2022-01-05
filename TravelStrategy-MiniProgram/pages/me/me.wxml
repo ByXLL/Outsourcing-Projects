@@ -29,7 +29,7 @@
     <!-- 2 收藏 -->
     <view class="collection d-clo d-jc-centen d-ai-centen">
         <view class="d-row d-jc-around d-ai-centen font30" style="width:600rpx">
-            <view class="text-center" bindtap="toLove"> 
+            <view class="text-center" bindtap="toRelease"> 
                 <image class="coll-img" src="/static/me/release.png"></image> 
                 <text> \n 我的发布 </text> 
             </view>

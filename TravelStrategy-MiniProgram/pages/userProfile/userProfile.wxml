@@ -38,6 +38,6 @@
   </van-cell-group>
   <text class="edit-password">修改密码</text>
   <van-button custom-class="submitBtn" bind:click="editUserInfo" round type="info" block>确认修改</van-button>
-  <van-button custom-class="submitBtn" bind:click="logout" round type="warning" block>退出登录</van-button>
+  <!-- <van-button custom-class="submitBtn" bind:click="logout" round type="warning" block>退出登录</van-button> -->
   <van-toast id="van-toast" />
 </view>

@@ -71,6 +71,12 @@
           "pathName": "pages/userProfile/userProfile",
           "query": "userId=2",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/release/release",
+          "query": "",
+          "scene": null
         }
       ]
     }

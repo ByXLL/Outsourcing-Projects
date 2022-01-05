@@ -80,19 +80,9 @@ Page({
     /**
      * 旅行照片浏览
      */
-    cameraClick: function(){
-        wx.chooseImage({
-            count: 9,
-            sizeType: ['original', 'compressed'],
-            sourceType: ['album', 'camera'],
-            success (res) {
-                const tempFilePaths = res.tempFilePaths  
-
-                wx.previewImage({
-                    current: tempFilePaths[0], // 当前显示图片的http链接
-                    urls: tempFilePaths // 需要预览的图片http链接列表
-                })
-            }
+    cameraClick() {
+        wx.navigateTo({
+            url: `/pages/release/release`
         })
     },
     // 跳转我的信息页
@@ -118,5 +108,14 @@ Page({
                 url: `/pages/login/login`
             })
         })
+    },
+    toRelease() {
+
+    },
+    toLove() {
+
+    },
+    toStar() {
+
     }
 })
