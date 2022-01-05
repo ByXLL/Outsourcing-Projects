@@ -6,8 +6,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mali.travelstrategy.dto.UserParam;
 import com.mali.travelstrategy.dto.UserPasswordDto;
 import com.mali.travelstrategy.entity.ApiResult;
+import com.mali.travelstrategy.entity.RaidersStat;
 import com.mali.travelstrategy.entity.User;
+import com.mali.travelstrategy.entity.UserAttention;
 import com.mali.travelstrategy.enums.HttpCodeEnum;
+import com.mali.travelstrategy.mapper.RaidersStatMapper;
+import com.mali.travelstrategy.mapper.UserAttentionMapper;
 import com.mali.travelstrategy.mapper.UserMapper;
 import com.mali.travelstrategy.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -21,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,6 +36,12 @@ import java.util.Map;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RaidersStatMapper raidersStatMapper;
+
+    @Autowired
+    private UserAttentionMapper userAttentionMapper;
 
     /**
      * 登录
@@ -144,6 +155,41 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(user,userVO);
         return new ApiResult(HttpCodeEnum.SUCCESS.getCode(),"查询成功",userVO);
+    }
+
+    /**
+     * 查询用户的点赞收藏等信息
+     *
+     * @param id 用户id
+     * @return 响应数据
+     */
+    @Override
+    public ApiResult findUserStar(Integer id) {
+        if(id == null) { return new ApiResult(HttpCodeEnum.ARG_ERROR.getCode(),"参数异常"); }
+        User user = userMapper.selectById(id);
+        if(user == null) {  return new ApiResult(HttpCodeEnum.ERROR.getCode(),"操作失败,用户不存在");}
+        Map<String,Object> userStarInfo = new HashMap<>(16);
+
+        // 查询关注和被粉丝数
+        Map<String,Object> query1 = new HashMap<>(16);
+        query1.put("target_user_id", id);
+        List<UserAttention> userFansList = userAttentionMapper.selectByMap(query1);
+
+        Map<String,Object> query2 = new HashMap<>(16);
+        query2.put("user_id", id);
+        List<UserAttention> userStarList = userAttentionMapper.selectByMap(query2);
+
+        // 查询收藏的攻略列表
+        Map<String,Object> query3 = new HashMap<>(16);
+        query3.put("user_id", id);
+        List<RaidersStat> raidersStatList = raidersStatMapper.selectByMap(query3);
+
+        Map<String,Object> result = new HashMap<>(16);
+        result.put("userFansList",userFansList);
+        result.put("userStarList",userStarList);
+        result.put("raidersStatList",raidersStatList);
+
+        return new ApiResult(HttpCodeEnum.SUCCESS.getCode(),"查询成功",result);
     }
 
     /**

@@ -56,6 +56,13 @@ public interface UserService extends IService<User> {
     ApiResult findById(Integer id);
 
     /**
+     * 查询用户的点赞收藏等信息
+     * @param id    用户id
+     * @return      响应数据
+     */
+    ApiResult findUserStar(Integer id);
+
+    /**
      * 条件分页查询
      * @param userParam     用户名
      * @param page          当前页码

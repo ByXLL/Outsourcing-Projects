@@ -50,5 +50,10 @@ public class AppUserController {
     public ApiResult findById(@PathParam("id") Integer id) {
         return userService.findById(id);
     }
+
+    @GetMapping("/findUserStar")
+    public ApiResult findUserStar(@PathParam("id") Integer id) {
+        return userService.findUserStar(id);
+    }
 }
 

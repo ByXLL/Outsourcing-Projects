@@ -35,7 +35,6 @@ export function editPassword(data) {
   })
 }
 
-
 // 获取用户信息
 export function getUserInfoByUserId(userId) {
   return request({
@@ -43,5 +42,11 @@ export function getUserInfoByUserId(userId) {
   })
 }
 
+// 获取用户收藏/关注/粉丝信息
+export function findUserStar(userId) {
+  return request({
+    url: `/user/findUserStar?id=${userId}`,
+  })
+}
 
 

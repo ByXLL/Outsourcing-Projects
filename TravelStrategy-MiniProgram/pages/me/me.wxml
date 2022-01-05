@@ -4,8 +4,8 @@
     <view class="width100 bg">
         <view class="width85 d-row d-jc-between d-ai-centen margin-center">
             <view class="d-row d-ai-centen height100">
-                <image class="head-img" src="/static/head.png"></image>
-                <view class="padding-left-20"> 小馒头 </view>
+                <image class="head-img" src="{{userInfo.avatar}}"></image>
+                <view class="padding-left-20">{{userInfo.nickName}}</view>
             </view>
             <view class="d-row d-ai-end" style="height: 118rpx;" bindtap="homeClick">
                 <span>个人主页</span>
@@ -16,11 +16,11 @@
         <!-- 1.2 粉丝数 -->
         <view class="width85 d-row d-jc-between d-ai-centen margin-center padding-top-40 height100">
             <view class="width50 d-row d-jc-between">
-                <view class="text-center"> <text>6 \n 关注 </text> </view>
-                <view class="text-center"> <text>3 \n 收藏 </text> </view>
-                <view class="text-center"> <text>8 \n 粉丝 </text> </view>
+                <view class="text-center"> <text>{{userStarInfo.userStarList.length}} \n 关注 </text> </view>
+                <view class="text-center"> <text>{{userStarInfo.raidersStatList.length}} \n 收藏 </text> </view>
+                <view class="text-center"> <text>{{userStarInfo.userFansList.length}} \n 粉丝 </text> </view>
             </view>
-            <view class="d-row d-jc-centen d-ai-end clock-in ci-active " bindtap="clockInClick">
+            <view class="d-row d-jc-centen d-ai-end clock-in ci-active " bindtap="logout">
                 <view>退出登录</view>
             </view>
         </view> 
@@ -30,16 +30,16 @@
     <view class="collection d-clo d-jc-centen d-ai-centen">
         <view class="d-row d-jc-around d-ai-centen font30" style="width:600rpx">
             <view class="text-center" bindtap="toLove"> 
+                <image class="coll-img" src="/static/me/release.png"></image> 
+                <text> \n 我的发布 </text> 
+            </view>
+            <view class="text-center" bindtap="toLove"> 
                 <image class="coll-img" src="/static/me/love.png"></image> 
                 <text> \n 我的关注 </text> 
             </view>
             <view class="text-center" bindtap="toStar"> 
                 <image class="coll-img" src="/static/me/star.png"></image> 
                 <text> \n 我的收藏 </text> 
-            </view>
-            <view class="text-center" bindtap="toFan"> 
-                <image class="coll-img" src="/static/me/fan.png"></image> 
-                <text> \n 我的粉丝 </text> 
             </view>
             <view class="text-center" bindtap="toUserProfile"> 
                 <image class="coll-img" src="/static/me/userProfile.png"></image> 
@@ -54,7 +54,7 @@
         <i class="iconfont icon-paizhao2" style="font-size:52rpx;position:relative;top:5rpx;padding-right:20rpx;"></i>    
         分享你的旅行照片
     </view>
-
+    <van-dialog id="van-dialog" />
 </view>
 
 
