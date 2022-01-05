@@ -153,7 +153,7 @@ function getStorageByKey(key) {
  * 删除本地缓存
  */
 function deleteStorageByKey(key) {
-  wx.removeStorageSync({key: key})
+  wx.removeStorage({key: key})
   app.globalData[key] = null
 }
 /**

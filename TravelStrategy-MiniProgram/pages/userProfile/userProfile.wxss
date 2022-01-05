@@ -1,0 +1,44 @@
+.page-body{
+  height: 100%;
+  padding: 30rpx;
+}
+
+.avatar-warp{
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.avatar-warp::after{
+   border-bottom: 1px solid #ebedf0;
+    bottom: 0;
+    box-sizing: border-box;
+    content: " ";
+    left: 16px;
+    pointer-events: none;
+    position: absolute;
+    right: 16px;
+    transform: scaleY(.5);
+    transform-origin: center;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(235, 237, 240);
+}
+.field-label{
+  color: var(--field-label-color,#646566);
+  margin-left: 28rpx;
+}
+.avatar-warp .avatar-uploader{
+  padding-left: 50rpx;
+}
+.submitBtn{
+  margin-top: 50rpx;
+}
+.edit-password{
+  display: block;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 24rpx;
+  text-align: right;
+  margin: 30rpx 0;
+  color: red;
+}

@@ -1,22 +1,28 @@
 // me/me.js
+import {getStorageByKey} from "../../utils/util.js"
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        clockInTitle:"打卡",
-        overInfo:1,  // 已完善的资料
-        allInfo:4,   // 全部的资料
+
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let isLogin = getStorageByKey('isLogin')
+        if(isLogin == '' || isLogin == false) {
+          console.log('空')
+          wx.navigateTo({
+            url: `/pages/login/login`
+          })
+        }
         // 移除 tabBar 某一项右上角的文本
         wx.removeTabBarBadge({
-            index:3
+            index:2
         })
     },
 
@@ -47,23 +53,9 @@ Page({
     onUnload: function () {
 
     },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-        wx.stopPullDownRefresh()
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
     // 个人主页
     homeClick(){
-        let userId = 2
+        let userId = getStorageByKey('userInfo').id
         wx.navigateTo({
             url: `/pages/userInfo/userInfo?userId=${userId}`
         })
@@ -85,6 +77,13 @@ Page({
                     urls: tempFilePaths // 需要预览的图片http链接列表
                 })
             }
+        })
+    },
+    // 跳转我的信息页
+    toUserProfile() {
+        let userId = getStorageByKey('userInfo').id
+        wx.navigateTo({
+            url: `/pages/userProfile/userProfile?userId=${userId}`
         })
     }
 })

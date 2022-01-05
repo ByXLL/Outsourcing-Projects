@@ -11,7 +11,8 @@
     "pages/login/login",
     "pages/register/register",
     "pages/raidersDetail/raidersDetail",
-    "pages/raiders/raiders"
+    "pages/raiders/raiders",
+    "pages/userProfile/userProfile"
   ],
   "permission": {
     "scope.userLocation": {
@@ -61,7 +62,9 @@
     "van-panel": "@vant/weapp/panel/index",
     "van-field": "@vant/weapp/field/index",
     "van-toast": "@vant/weapp/toast/index",
-    "van-icon": "@vant/weapp/icon/index"
+    "van-icon": "@vant/weapp/icon/index",
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-switch": "@vant/weapp/switch/index"
   },
   "sitemapLocation": "sitemap.json"
 }

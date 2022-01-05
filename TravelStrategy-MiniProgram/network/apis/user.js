@@ -27,6 +27,15 @@ export function updateUser(data) {
   })
 }
 
+// 修改密码
+export function editPassword(data) {
+  return request({
+    url: `/user/editPassword`,
+    data
+  })
+}
+
+
 // 获取用户信息
 export function getUserInfoByUserId(userId) {
   return request({

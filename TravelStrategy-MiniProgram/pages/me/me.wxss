@@ -38,11 +38,10 @@ page {
     position: relative;
     top: -36rpx;
     margin-bottom: 30rpx;
-
     width: 686rpx;
     height: 168rpx;
     background-color: #ffffff;
-    border-radius: 10rpx;
+    border-radius: 30rpx;
 }
 .coll-img{
     width: 66rpx;

@@ -1,0 +1,43 @@
+<view class="page-body">
+  <view class="avatar-warp">
+    <text class="field-label">头像</text>
+    <van-uploader class="avatar-uploader" preview-size="100" max-count="1" file-list="{{ fileList }}" bind:after-read="afterRead" bind:delete="deleteAvatar" />
+  </view>
+  <van-cell-group>
+    <van-field
+      custom-style="height:100rpx"
+      label="用户名" model:value="{{ userInfo.userName }}" readonly
+      border clearable center
+    />
+    <van-field
+      custom-style="height:100rpx" label="昵称" 
+      bind:input="onInput" data-field="nickName"
+      model:value="{{  userInfo.nickName  }}" placeholder="请输入用户名"
+      border clearable center
+    />
+    <van-field
+      custom-style="height:100rpx" label="年龄"
+      bind:input="onInput" data-field="age"
+      model:value="{{  userInfo.age  }}" placeholder="请输入年龄" type="number"
+      border clearable center
+    />
+    <van-field
+      custom-style="height:100rpx"
+      bind:input="onInput" data-field="city"
+      label="城市" model:value="{{  userInfo.city  }}"
+      placeholder="请输入城市名"
+      border clearable center
+    />
+    <van-field
+      custom-style="height:100rpx"
+      bind:input="onInput" data-field="introduction"
+      label="简介" model:value="{{  userInfo.introduction }}"
+      placeholder="请输入简介" type="textarea"
+      border clearable center
+    />
+  </van-cell-group>
+  <text class="edit-password">修改密码</text>
+  <van-button custom-class="submitBtn" bind:click="editUserInfo" round type="info" block>确认修改</van-button>
+  <van-button custom-class="submitBtn" bind:click="logout" round type="warning" block>退出登录</van-button>
+  <van-toast id="van-toast" />
+</view>

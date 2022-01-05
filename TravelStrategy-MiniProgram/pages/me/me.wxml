@@ -2,8 +2,6 @@
 <view class="content">
     <!-- 1 个人信息 -->
     <view class="width100 bg">
-
-        <!-- 1.1 头像 -->
         <view class="width85 d-row d-jc-between d-ai-centen margin-center">
             <view class="d-row d-ai-centen height100">
                 <image class="head-img" src="/static/head.png"></image>
@@ -19,29 +17,33 @@
         <view class="width85 d-row d-jc-between d-ai-centen margin-center padding-top-40 height100">
             <view class="width50 d-row d-jc-between">
                 <view class="text-center"> <text>6 \n 关注 </text> </view>
-                <view class="text-center"> <text>8 \n 粉丝 </text> </view>
                 <view class="text-center"> <text>3 \n 收藏 </text> </view>
+                <view class="text-center"> <text>8 \n 粉丝 </text> </view>
             </view>
-            <!-- <view class="d-row d-jc-centen d-ai-end clock-in {{clockInTitle=='已打卡'?'ci-active':''}}" bindtap="clockInClick">
-                <view>{{clockInTitle}}</view>
-            </view> -->
+            <view class="d-row d-jc-centen d-ai-end clock-in ci-active " bindtap="clockInClick">
+                <view>退出登录</view>
+            </view>
         </view> 
     </view>
 
     <!-- 2 收藏 -->
     <view class="collection d-clo d-jc-centen d-ai-centen">
         <view class="d-row d-jc-around d-ai-centen font30" style="width:600rpx">
-            <view class="text-center"> 
-                <image class="coll-img" src="/static/shoucang.png"></image> 
-                <text> \n 我的信息 </text> 
+            <view class="text-center" bindtap="toLove"> 
+                <image class="coll-img" src="/static/me/love.png"></image> 
+                <text> \n 我的关注 </text> 
             </view>
-            <view class="text-center"> 
-                <image class="coll-img" src="/static/shoucang.png"></image> 
+            <view class="text-center" bindtap="toStar"> 
+                <image class="coll-img" src="/static/me/star.png"></image> 
                 <text> \n 我的收藏 </text> 
             </view>
-            <view class="text-center"> 
-                <image class="coll-img" src="/static/zuji.png"></image> 
-                <text> \n 我的足迹 </text> 
+            <view class="text-center" bindtap="toFan"> 
+                <image class="coll-img" src="/static/me/fan.png"></image> 
+                <text> \n 我的粉丝 </text> 
+            </view>
+            <view class="text-center" bindtap="toUserProfile"> 
+                <image class="coll-img" src="/static/me/userProfile.png"></image> 
+                <text> \n 我的信息 </text> 
             </view>
         </view>
     </view>
