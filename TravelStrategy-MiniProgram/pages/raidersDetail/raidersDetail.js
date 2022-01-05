@@ -24,6 +24,7 @@ Page({
         commentList: [],
         userInfo: {},
         isWatching: false,
+        isNotMe: false,
     },
 
     /**
@@ -57,6 +58,7 @@ Page({
             userInfo: userInfo
         })
         this.getIsWatchUser()
+        this.judgeIsNotMe()
     },
       /**
      * 页面上拉触底事件的处理函数
@@ -67,6 +69,14 @@ Page({
         if(this.data.isNoMore) { return }
         console.log("上拉加载更多")
         this._getRaidersCommentById(false)
+    },
+    // 判断是不是本人
+    judgeIsNotMe() {
+        if(this.data.authorId == this.data.userInfo.id) {
+            this.setData({ isNotMe: false})            
+        }else {
+            this.setData({ isNotMe: true  }) 
+        }
     },
     // 获取详攻略情信息
     _getRaidersById() {

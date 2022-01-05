@@ -15,7 +15,7 @@
                     <view class="user-name">{{detailInfo.author}}</view>   
                     <view class="createTime">{{common.formatTime2(detailInfo.createTime)}}</view>            
                 </view>
-                <view class="opreate">
+                <view class="opreate" wx:if="{{isNotMe}}">
                     <view bindtap="followUser" class="opreate-edit opreate-edit__wait">
                         <block wx:if="{{!isWatching}}">
                             <view class="opreate-edit__icon opreate-follow__icon-wait"></view>关注                        

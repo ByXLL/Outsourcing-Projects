@@ -7,12 +7,12 @@
     <view class="user-name__footprint">
         <view class="d-flex">
             <view class="user-name">{{userInfo.nickName}}</view>
-            <view class="opreate">
-                <!-- <view bindtap="followUser" class="opreate-edit opreate-edit__finish">
+            <view class="opreate" wx:if="{{isNotMe}}">
+                <view wx:if="{{isFollowed}}" bindtap="followUser" class="opreate-edit opreate-edit__wait">
                     <view class="opreate-edit__icon opreate-follow__icon-finish"></view>
                     已关注
-                </view> -->
-                <view bindtap="followUser" class="opreate-edit opreate-edit__wait">
+                </view>
+                <view wx:else bindtap="followUser" class="opreate-edit opreate-edit__wait">
                     <view class="opreate-edit__icon opreate-follow__icon-wait"></view>
                     关注
                 </view>
@@ -26,13 +26,10 @@
     </view>
     <view class="d-flex user-tag light">
         <view class="user-tag__bg">
-            <text class="font-bold">10000</text> 关注
+            <text class="font-bold">{{userStarInfo.userStarList.length}}</text> 关注
         </view>
         <view class="user-tag__bg">
-            <text class="font-bold">10000</text> 粉丝
-        </view>
-        <view class="user-tag__bg">
-            <text class="font-bold">10000</text> 获赞
+            <text class="font-bold">{{userStarInfo.userFansList.length}}</text> 粉丝
         </view>
     </view>
     <view class="user-des multiline-ellipsis">{{userInfo.introduction?userInfo.introduction:'世界那么大，我想出去看看'}}</view>
@@ -65,3 +62,5 @@
         </view>
     </view>
 </scroll-view>
+<van-toast id="van-toast" />
+
