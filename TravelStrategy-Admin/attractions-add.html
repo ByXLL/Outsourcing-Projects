@@ -245,6 +245,10 @@
                         <label for="web_site_title">景点名称</label>
                         <input class="form-control" type="text" id="name" name="name" value="" placeholder="请输入景点名称" >
                       </div>
+                      <div class="form-group has-error">
+                        <label for="web_site_title">景点标题</label>
+                        <input class="form-control" type="text" id="title" name="title" value="" placeholder="请输入景点标题" >
+                      </div>
                       <div class="form-group">
                         <label for="web_site_title">票价</label>
                         <input class="form-control" type="text" id="fare" name="fare" value="" placeholder="请输入票价" >
@@ -368,6 +372,7 @@
       })
       let data = {
         name: $("#name").val(),
+        title: $("#title").val(),
         coverPic: $('#coverPic').attr('src') ?  $('#coverPic').attr('src') : '',
         pic: pics.toString(),
         content: editor.txt.html(),
@@ -375,7 +380,7 @@
         city: $("#city").val(),
         starRating: $("#starRating").val()
       }
-      if(data.name == "" || data.content == "") {
+      if(data.title =="" || data.name == "" || data.content == "") {
         return lightyear.notify('请填写必填项', 'danger', 100);
       }
       $.ajax({
