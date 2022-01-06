@@ -83,6 +83,12 @@
           "pathName": "pages/raidersList/raidersList",
           "query": "userId=2",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/editPassword/editPassword",
+          "query": "",
+          "scene": null
         }
       ]
     }

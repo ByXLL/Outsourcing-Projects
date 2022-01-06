@@ -41,4 +41,10 @@ class RaidersServiceImplTest {
         ApiResult result = raidersService.findParamByPager(raidersParam, 1, 10);
 
     }
+
+    @Test
+    void findUserStarRaiders() {
+        ApiResult userStarRaiders = raidersService.findUserStarRaiders(2);
+        System.out.println();
+    }
 }

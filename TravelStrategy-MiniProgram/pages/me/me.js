@@ -1,7 +1,6 @@
 // me/me.js
-import {getStorageByKey} from "../../utils/util.js"
 import Dialog from '@vant/weapp/dialog/dialog'
-import {setStorage,deleteStorageByKey} from "../../utils/util.js"
+import {getStorageByKey,setStorage,deleteStorageByKey} from "../../utils/util.js"
 import {getUserInfoByUserId,findUserStar} from "../../network/apis/user.js"
 Page({
 
@@ -110,12 +109,16 @@ Page({
         })
     },
     toRelease() {
-        console.log('11111')
-    },
-    toLove() {
-
+        let userId = this.data.userInfo.id
+        wx.navigateTo({
+            url: `/pages/raidersList/raidersList?userId=${userId}&isMyStar=${false}`
+        })
     },
     toStar() {
-
+        console.log('11111')
+        let userId = this.data.userInfo.id
+        wx.navigateTo({
+            url: `/pages/raidersList/raidersList?userId=${userId}&isMyStar=${true}`
+        })
     },
 })

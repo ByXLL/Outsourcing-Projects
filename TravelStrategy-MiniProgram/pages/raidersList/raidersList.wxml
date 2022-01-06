@@ -9,8 +9,8 @@
                     <view class="">
                         <view class="time">发布于 {{common.formatTime(item.createTime)}}</view>
                         <view class="like">
-                            <text class="f-blod">999</text> 点赞                        
-                          <view class="btn-warp">
+                          作者<text class="f-blod">{{item.author}}</text>                        
+                          <view class="btn-warp" wx:if="{{!isMyStar}}">
                             <van-button style="margin-right: 20rpx;" round type="info" size="small" data-id="{{item.id}}" bind:click="toEdit">编辑</van-button>
                             <van-button round type="danger" size="small" data-id="{{item.id}}" bind:click="toDelete">删除</van-button>
                           </view>                        

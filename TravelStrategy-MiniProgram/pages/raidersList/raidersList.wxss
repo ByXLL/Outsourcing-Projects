@@ -70,6 +70,7 @@
 
 .f-blod {
   font-weight: 700;
+  margin-left: 10rpx;
 }
 
 .list-time {

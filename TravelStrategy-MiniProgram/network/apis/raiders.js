@@ -47,6 +47,14 @@ export function getRaidersByUserId(userId) {
   })
 }
 
+// 通过用户id获取关注的攻略信息列表
+export function getUserStarRaiders(userId) {
+  return request({
+    url: `/raiders/findUserStarRaiders?userId=${userId}`
+  })
+}
+
+
 // 条件查询攻略列表
 export function  getRaidersByParam(data) {
   return request({

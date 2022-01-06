@@ -48,6 +48,11 @@ public class AppRaidersController {
         return raidersService.findDetailById(id,userId);
     }
 
+    @GetMapping("/findUserStarRaiders")
+    public ApiResult findUserStarRaiders(@PathParam("userId") Integer userId) {
+        return raidersService.findUserStarRaiders(userId);
+    }
+
     @PassTokenRequired
     @GetMapping("/findByUserId")
     public ApiResult findByUserId(@PathParam("userId") Integer userId) {

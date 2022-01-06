@@ -30,6 +30,7 @@ export function updateUser(data) {
 // 修改密码
 export function editPassword(data) {
   return request({
+    method: 'post',
     url: `/user/editPassword`,
     data
   })

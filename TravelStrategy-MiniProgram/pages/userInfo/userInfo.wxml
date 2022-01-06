@@ -55,7 +55,7 @@
                     <view class="title">{{item.title}}</view>
                     <view class="">
                         <view class="time">发布于 {{common.formatTime(item.createTime)}}</view>
-                        <view class="like"> <text class="f-blod">999</text> 点赞</view>
+                        <!-- <view class="like"> <text class="f-blod">999</text> 点赞</view> -->
                     </view>
                 </view>
             </view>

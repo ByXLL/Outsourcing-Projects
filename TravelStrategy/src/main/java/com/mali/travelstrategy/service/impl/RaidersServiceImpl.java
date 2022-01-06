@@ -19,6 +19,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -114,6 +115,27 @@ public class RaidersServiceImpl extends ServiceImpl<RaidersMapper, Raiders> impl
     public ApiResult findByUserId(Integer userId) {
         if(userId == null) { return new ApiResult(HttpCodeEnum.ARG_ERROR.getCode(),"参数异常"); }
         List<Raiders> raidersList = raidersMapper.selectList(new QueryWrapper<Raiders>().eq("author_id", userId).orderByDesc("create_time"));
+        return new ApiResult(HttpCodeEnum.SUCCESS.getCode(),"查询成功",raidersList);
+    }
+
+    /**
+     * 通过用户id查询用户点赞的攻略
+     *
+     * @param userId 用户id
+     * @return 响应数据
+     */
+    @Override
+    public ApiResult findUserStarRaiders(Integer userId) {
+        if(userId == null) { return new ApiResult(HttpCodeEnum.ARG_ERROR.getCode(),"参数异常"); }
+        List<RaidersStat> raidersStats = raidersStatMapper.selectList(new QueryWrapper<RaidersStat>().eq("user_id", userId));
+        List<Raiders> raidersList = new ArrayList<>();
+        if(raidersStats.size() >0) {
+            List<Integer> raidersIds = new ArrayList<>();
+            for (RaidersStat item : raidersStats) {
+                raidersIds.add(item.getRaidersId());
+            }
+            raidersList = raidersMapper.selectList(new QueryWrapper<Raiders>().in("id", raidersIds));
+        }
         return new ApiResult(HttpCodeEnum.SUCCESS.getCode(),"查询成功",raidersList);
     }
 

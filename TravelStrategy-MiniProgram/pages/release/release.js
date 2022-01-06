@@ -2,7 +2,7 @@ import {
   baseURL
 } from '../../network/config.js'
 import {getStorageByKey} from "../../utils/util.js"
-import {addRaiders,getRaidersById} from "../../network/apis/raiders.js"
+import {addRaiders,getRaidersById,updateRaiders} from "../../network/apis/raiders.js"
 import Toast from "@vant/weapp/toast/toast"
 Page({
   data: {
@@ -18,29 +18,64 @@ Page({
   },
   onLoad(option) {
     let id = option.id
+    console.log(option)
     if(id != undefined) {
       this.setData({id,isEdit:true})
-      this._getRaidersById()
+    }
+  },
+   /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    if(this.data.isEdit) {
+      this._getRaidersById()      
     }
   },
   // 获取攻略详情
   _getRaidersById() {
     getRaidersById(this.data.id).then(({data}) => {
       this.setData({raidersInfo:data})
+      this.bindRaidersInfo(data)
     }).catch(err => {
       console.log(err)
     })
   },
+  bindRaidersInfo(data) {
+    if(data.coverPic != '') {
+      this.setData({coverPicList:[{url:data.coverPic}]})
+    }
+    this.setData({title:data.title})
+    let picList = data.pic.split(',')
+    if(picList.length > 0) {
+      let bigPicList = []
+      picList.forEach(item =>{
+        bigPicList.push({url:item})
+      })
+      this.setData({bigPicList})      
+    }
+  },
+  // 提交
   async formSubmit(e) {
     let data = await this.buildFormData()
     if(data.title == '') { return Toast.fail('请填写简介') }
     console.log(data)
-    addRaiders(data).then(res => {
-      console.log(res)
-      Toast.success('发布攻略成功')
-    }).catch(err => {
-      Toast.fail('发布攻略失败')
-    })
+    if(this.data.isEdit) {
+      data.id = this.data.id
+      updateRaiders(data).then(res => {
+        console.log(res)
+        Toast.success('修改攻略成功')
+      }).catch(err => {
+        Toast.fail('修改攻略失败')
+      }) 
+    }else {
+      addRaiders(data).then(res => {
+        console.log(res)
+        Toast.success('发布攻略成功')
+      }).catch(err => {
+        Toast.fail('发布攻略失败')
+      })      
+    }
+
   },
   // 预览/编辑
   readOnlyChange() {
@@ -48,10 +83,14 @@ Page({
       readOnly: !this.data.readOnly
     })
   },
+  // 初始化富文本
   onEditorReady() {
     const that = this
     wx.createSelectorQuery().select('#editor').context(function (res) {
       that.editorCtx = res.context
+      that.editorCtx.setContents({
+        html: that.data.raidersInfo.content
+      })
     }).exec()
   },
   undo() {

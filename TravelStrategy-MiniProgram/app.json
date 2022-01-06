@@ -14,7 +14,8 @@
     "pages/raiders/raiders",
     "pages/userProfile/userProfile",
     "pages/release/release",
-    "pages/raidersList/raidersList"
+    "pages/raidersList/raidersList",
+    "pages/editPassword/editPassword"
   ],
   "permission": {
     "scope.userLocation": {

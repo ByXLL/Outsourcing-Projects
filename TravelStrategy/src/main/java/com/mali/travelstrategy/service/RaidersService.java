@@ -55,6 +55,13 @@ public interface RaidersService extends IService<Raiders> {
     ApiResult findByUserId(Integer userId);
 
     /**
+     * 通过用户id查询用户点赞的攻略
+     * @param userId        用户id
+     * @return          响应数据
+     */
+    ApiResult findUserStarRaiders(Integer userId);
+
+    /**
      * 分页查询
      * @param page      当前页码
      * @param pageSize  每页大小

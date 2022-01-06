@@ -1,4 +1,4 @@
-import {getRaidersByUserId,delRaiders} from "../../network/apis/raiders.js"
+import {getRaidersByUserId,delRaiders,getUserStarRaiders} from "../../network/apis/raiders.js"
 import { getStorageByKey } from '../../utils/util.js'
 import Toast from "@vant/weapp/toast/toast"
 import Dialog from '@vant/weapp/dialog/dialog'
@@ -11,14 +11,18 @@ Page({
         userId: '',
         loginUserInfo: {},
         raidersList: [],
+        isMyStar:false,
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.setData({userId:options.userId})
-        console.log(options.userId)
+        this.setData({
+            userId:options.userId,
+            isMyStar: options.isMyStar
+        })
+        console.log(options)
         let userInfo = getStorageByKey('userInfo')
         this.setData({
             loginUserInfo: userInfo
@@ -48,12 +52,25 @@ Page({
     },
     // 获取用户的攻略
     getRaiders() {
-        getRaidersByUserId(this.data.userId).then(({data}) => {
-            console.log(data)
-            this.setData({raidersList:data})
-        }).catch(err => {
-            console.log(err)
-        })
+        console.log(this.data.isMyStar == 'true')
+        if(this.data.isMyStar == 'true') {
+            console.log('获取我收藏的')
+            getUserStarRaiders(this.data.userId).then(({data}) => {
+                console.log(data)
+                this.setData({raidersList:data})
+            }).catch(err => {
+                console.log(err)
+            })            
+        }else {
+            console.log('获取我的')
+            getRaidersByUserId(this.data.userId).then(({data}) => {
+                console.log(data)
+                this.setData({raidersList:data})
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+
     },
     // 跳转至攻略详情
     toRaidersDetail({currentTarget}) {
