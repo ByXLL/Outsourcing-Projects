@@ -20,7 +20,7 @@ Page({
     onLoad: function (options) {
         this.setData({
             userId:options.userId,
-            isMyStar: options.isMyStar
+            isMyStar: options.isMyStar == 'false' ? false : true
         })
         console.log(options)
         let userInfo = getStorageByKey('userInfo')
