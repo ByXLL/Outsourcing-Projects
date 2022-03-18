@@ -35,6 +35,12 @@ mybatis-plus:
   mapper-locations: classpath:/com/mali/travelstrategy/mapper/xml/*Mapper.xml
 
 
+qiniu:
+  accessKey: S1shIY29FDvsVAhu6KCNx5sB1cfhHMA4g1ivWMbr
+  secretKey: WMWoZl27yYlPwJYNngIy-x01XrXwrBrR5Apl-if1
+  bucket: mall
+  path: http://oss.foxsharp.cn
+
 #travel:
 #  path:
 #    upload: c:/data/upload

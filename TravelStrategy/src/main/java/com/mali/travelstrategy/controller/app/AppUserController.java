@@ -5,6 +5,7 @@ import com.mali.travelstrategy.annotation.PassTokenRequired;
 import com.mali.travelstrategy.dto.UserPasswordDto;
 import com.mali.travelstrategy.entity.ApiResult;
 import com.mali.travelstrategy.entity.User;
+import com.mali.travelstrategy.enums.HttpCodeEnum;
 import com.mali.travelstrategy.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

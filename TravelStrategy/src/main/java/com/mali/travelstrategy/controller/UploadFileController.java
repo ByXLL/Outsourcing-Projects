@@ -4,14 +4,13 @@ import com.mali.travelstrategy.annotation.PassTokenRequired;
 import com.mali.travelstrategy.config.ServerConfig;
 import com.mali.travelstrategy.entity.ApiResult;
 import com.mali.travelstrategy.enums.HttpCodeEnum;
+import com.mali.travelstrategy.util.QiniuUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -36,6 +36,12 @@ public class UploadFileController {
 
     @Value("${server.servlet.context-path}")
     private String contextPath;
+
+    private QiniuUtil qiniuUtil;
+
+    public UploadFileController(QiniuUtil qiniuUtil) {
+        this.qiniuUtil = qiniuUtil;
+    }
 
 //    @Value("${server.servlet.context-path}")
 //    private String contextPath;
@@ -100,4 +106,20 @@ public class UploadFileController {
         return new ApiResult(HttpCodeEnum.SUCCESS.getCode(), "文件上传成功", fileInfo);
     }
 
+
+    @PassTokenRequired
+    @PostMapping(path = {"/app/upload/qn","/admin/upload/qn"})
+    public ApiResult uploadToQiNiu(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+        if (file.isEmpty()) {
+            return new ApiResult(HttpCodeEnum.ARG_ERROR.getCode(), "参数异常");
+        }
+        String newFileName = UUID.randomUUID() + file.getOriginalFilename().substring(Objects.requireNonNull(file.getOriginalFilename()).lastIndexOf("."));
+        try {
+            byte[] fileBytes = file.getBytes();
+            return qiniuUtil.Upload(fileBytes, newFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ApiResult(HttpCodeEnum.ERROR.getCode(),"上传失败");
+        }
+    }
 }
